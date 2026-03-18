@@ -24,3 +24,4 @@
 
 ;; Error codes for predictable failure handling
 (define-constant err-owner-only (err u100))
+(define-constant err-invalid-amount (err u101))
