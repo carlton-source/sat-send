@@ -80,3 +80,6 @@
 
 ;; Total amount of STX a user has sent
 (define-map user-total-sent principal uint)
+
+;; Total amount of STX a user has received
+(define-map user-total-received principal uint)
