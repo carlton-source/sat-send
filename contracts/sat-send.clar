@@ -120,3 +120,4 @@
     (let
         (
             (tip-id (var-get total-tips-sent))
+            (fee (calculate-fee amount))
