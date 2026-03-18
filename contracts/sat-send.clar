@@ -117,3 +117,6 @@
 ;; The contract owner does not pay platform fees.
 
 (define-public (send-stx-tip (recipient principal) (amount uint) (message (string-utf8 280)))
+    (let
+        (
+            (tip-id (var-get total-tips-sent))
