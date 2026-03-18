@@ -83,3 +83,11 @@
 
 ;; Total amount of STX a user has received
 (define-map user-total-received principal uint)
+
+;; ---------------------------------------------------------
+;; Private Functions
+;; ---------------------------------------------------------
+
+;; calculate-fee
+;; Calculates the SatSend platform fee based on the configured basis points
+(define-private (calculate-fee (amount uint))
