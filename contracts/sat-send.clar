@@ -44,3 +44,6 @@
 
 ;; Total number of tips sent through SatSend
 (define-data-var total-tips-sent uint u0)
+
+;; Total volume of STX tipped across the platform
+(define-data-var total-volume uint u0)
