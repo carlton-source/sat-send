@@ -130,3 +130,5 @@
 
             ;; Recipient statistics
             (recipient-received (default-to u0 (map-get? user-total-received recipient)))
+             (recipient-count (default-to u0 (map-get? user-received-count recipient)))
+        )
