@@ -37,3 +37,10 @@
 ;; 50 basis points = 0.5% fee
 (define-constant fee-basis-points u50)
 (define-constant basis-points-divisor u10000)
+
+;; ---------------------------------------------------------
+;; Global Protocol Statistics
+;; ---------------------------------------------------------
+
+;; Total number of tips sent through SatSend
+(define-data-var total-tips-sent uint u0)
