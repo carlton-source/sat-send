@@ -74,3 +74,6 @@
 
 ;; Number of tips a user has sent
 (define-map user-tip-count principal uint)
+
+;; Number of tips a user has received
+(define-map user-received-count principal uint)
