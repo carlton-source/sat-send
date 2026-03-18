@@ -93,3 +93,27 @@
 (define-private (calculate-fee (amount uint))
     (/ (* amount fee-basis-points) basis-points-divisor)
 )
+
+;; ---------------------------------------------------------
+;; Public Functions
+;; ---------------------------------------------------------
+
+;; send-stx-tip
+;;
+;; Core function of the SatSend protocol.
+;;
+;; Allows a user to send a micro-tip in STX to another user along with
+;; an optional message.
+;;
+;; Process:
+;; 1. Validate the tip parameters
+;; 2. Calculate the platform fee
+;; 3. Transfer the net amount to the recipient
+;; 4. Transfer the fee to the protocol owner
+;; 5. Record the tip on-chain
+;; 6. Update user statistics
+;; 7. Update global protocol statistics
+;;
+;; The contract owner does not pay platform fees.
+
+(define-public (send-stx-tip (recipient principal) (amount uint) (message (string-utf8 280)))
