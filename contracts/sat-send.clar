@@ -50,3 +50,11 @@
 
 ;; Total platform fees accumulated by the protocol
 (define-data-var platform-fees uint u0)
+
+;; ---------------------------------------------------------
+;; Data Maps
+;; ---------------------------------------------------------
+
+;; Tip registry
+;; Stores every tip sent through the SatSend protocol
+(define-map tips
