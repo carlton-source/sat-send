@@ -61,3 +61,4 @@
     { tip-id: uint }
     {
         sender: principal,
+        recipient: principal,
