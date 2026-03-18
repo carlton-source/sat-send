@@ -58,3 +58,4 @@
 ;; Tip registry
 ;; Stores every tip sent through the SatSend protocol
 (define-map tips
+    { tip-id: uint }
