@@ -47,3 +47,6 @@
 
 ;; Total volume of STX tipped across the platform
 (define-data-var total-volume uint u0)
+
+;; Total platform fees accumulated by the protocol
+(define-data-var platform-fees uint u0)
