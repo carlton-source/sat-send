@@ -67,3 +67,10 @@
         tip-height: uint
     }
 )
+
+;; ---------------------------------------------------------
+;; User Activity Tracking
+;; ---------------------------------------------------------
+
+;; Number of tips a user has sent
+(define-map user-tip-count principal uint)
