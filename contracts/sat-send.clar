@@ -156,3 +156,9 @@
             true
             (try! (stx-transfer? fee tx-sender contract-owner))
         )
+
+        ;; -------------------------------------------------
+        ;; Record the Tip
+        ;; -------------------------------------------------
+
+        (map-set tips
