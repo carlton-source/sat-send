@@ -218,3 +218,8 @@
         total-received: (default-to u0 (map-get? user-total-received user))
     }
 )
+
+;; get-platform-stats
+;;
+;; Returns global statistics for the SatSend protocol.
+(define-read-only (get-platform-stats)
