@@ -132,3 +132,10 @@
             (recipient-received (default-to u0 (map-get? user-total-received recipient)))
              (recipient-count (default-to u0 (map-get? user-received-count recipient)))
         )
+
+        ;; -------------------------------------------------
+        ;; Validation Checks
+        ;; -------------------------------------------------
+
+        ;; Ensure the amount is greater than zero
+        (asserts! (> amount u0) err-invalid-amount)
