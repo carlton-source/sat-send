@@ -181,3 +181,9 @@
 
         (map-set user-tip-count tx-sender (+ sender-count u1))
         (map-set user-received-count recipient (+ recipient-count u1))
+
+        ;; -------------------------------------------------
+        ;; Update Global Protocol Statistics
+        ;; -------------------------------------------------
+
+        (var-set total-tips-sent (+ tip-id u1))
