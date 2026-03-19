@@ -227,7 +227,7 @@
         total-tips: (var-get total-tips-sent),
         total-volume: (var-get total-volume),
         platform-fees: (var-get platform-fees)
-         }
+    }
 )
 
 ;; get-user-sent-total
@@ -248,3 +248,5 @@
 ;;
 ;; Utility function that calculates the platform fee for a given amount.
 (define-read-only (get-fee-for-amount (amount uint))
+    (ok (calculate-fee amount))
+)
