@@ -226,3 +226,4 @@
     {
         total-tips: (var-get total-tips-sent),
         total-volume: (var-get total-volume),
+        platform-fees: (var-get platform-fees)
