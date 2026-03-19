@@ -130,7 +130,7 @@
 
             ;; Recipient statistics
             (recipient-received (default-to u0 (map-get? user-total-received recipient)))
-             (recipient-count (default-to u0 (map-get? user-received-count recipient)))
+            (recipient-count (default-to u0 (map-get? user-received-count recipient)))
         )
 
         ;; -------------------------------------------------
@@ -189,3 +189,8 @@
         (var-set total-tips-sent (+ tip-id u1))
         (var-set total-volume (+ (var-get total-volume) amount))
         (var-set platform-fees (+ (var-get platform-fees) fee))
+
+        ;; Return the tip ID for reference
+        (ok tip-id)
+    )
+)
