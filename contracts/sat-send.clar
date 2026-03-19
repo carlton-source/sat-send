@@ -153,3 +153,4 @@
         ;; Transfer the platform fee to the protocol owner
         ;; Skip if the sender is the contract owner
         (if is-owner
+            true
