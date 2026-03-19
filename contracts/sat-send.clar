@@ -241,3 +241,5 @@
 ;;
 ;; Returns the total amount of STX a user has received through SatSend.
 (define-read-only (get-user-received-total (user principal))
+    (ok (default-to u0 (map-get? user-total-received user)))
+)
