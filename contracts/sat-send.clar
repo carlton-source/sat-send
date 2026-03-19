@@ -194,3 +194,12 @@
         (ok tip-id)
     )
 )
+
+;; ---------------------------------------------------------
+;; Read-Only Functions
+;; ---------------------------------------------------------
+
+;; get-tip
+;;
+;; Retrieves the details of a specific tip using its ID.
+(define-read-only (get-tip (tip-id uint))
