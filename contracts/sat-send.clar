@@ -203,3 +203,5 @@
 ;;
 ;; Retrieves the details of a specific tip using its ID.
 (define-read-only (get-tip (tip-id uint))
+    (map-get? tips { tip-id: tip-id })
+)
