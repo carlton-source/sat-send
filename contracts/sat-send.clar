@@ -227,3 +227,10 @@
         total-tips: (var-get total-tips-sent),
         total-volume: (var-get total-volume),
         platform-fees: (var-get platform-fees)
+         }
+)
+
+;; get-user-sent-total
+;;
+;; Returns the total amount of STX a user has sent through SatSend.
+(define-read-only (get-user-sent-total (user principal))
