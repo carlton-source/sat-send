@@ -205,3 +205,9 @@
 (define-read-only (get-tip (tip-id uint))
     (map-get? tips { tip-id: tip-id })
 )
+
+;; get-user-stats
+;;
+;; Returns tipping statistics for a specific user within the
+;; SatSend protocol.
+(define-read-only (get-user-stats (user principal))
