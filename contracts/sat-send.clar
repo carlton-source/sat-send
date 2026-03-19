@@ -139,3 +139,6 @@
 
         ;; Ensure the amount is greater than zero
         (asserts! (> amount u0) err-invalid-amount)
+
+        ;; Prevent users from tipping themselves
+        (asserts! (not (is-eq tx-sender recipient)) err-invalid-amount)
