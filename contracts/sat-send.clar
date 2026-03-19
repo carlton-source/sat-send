@@ -165,3 +165,4 @@
             { tip-id: tip-id }
             {
                 sender: tx-sender,
+                recipient: recipient,
