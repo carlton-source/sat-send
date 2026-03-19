@@ -171,3 +171,9 @@
                 tip-height: stacks-block-height
             }
         )
+
+        ;; -------------------------------------------------
+        ;; Update User Statistics
+        ;; -------------------------------------------------
+
+        (map-set user-total-sent tx-sender (+ sender-sent amount))
