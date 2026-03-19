@@ -223,3 +223,5 @@
 ;;
 ;; Returns global statistics for the SatSend protocol.
 (define-read-only (get-platform-stats)
+    {
+        total-tips: (var-get total-tips-sent),
