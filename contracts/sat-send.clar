@@ -142,10 +142,14 @@
 
         ;; Prevent users from tipping themselves
         (asserts! (not (is-eq tx-sender recipient)) err-invalid-amount)
-        
+
         ;; -------------------------------------------------
         ;; STX Transfers
         ;; -------------------------------------------------
 
         ;; Transfer the net amount to the recipient
         (try! (stx-transfer? net-amount tx-sender recipient))
+
+        ;; Transfer the platform fee to the protocol owner
+        ;; Skip if the sender is the contract owner
+        (if is-owner
