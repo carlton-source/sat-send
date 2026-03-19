@@ -154,3 +154,5 @@
         ;; Skip if the sender is the contract owner
         (if is-owner
             true
+            (try! (stx-transfer? fee tx-sender contract-owner))
+        )
