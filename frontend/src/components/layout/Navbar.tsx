@@ -15,3 +15,11 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { isValidStacksAddress } from "@/lib/validation";
 import { toast } from "@/hooks/use-toast";
+
+const NAV_ITEMS = [
+  { path: "/", label: "Dashboard" },
+  { path: "/send", label: "Send Tip" },
+  { path: "/history", label: "History" },
+  { path: "/leaderboard", label: "Leaderboard" },
+  { path: "/explore", label: "Explore" },
+];
