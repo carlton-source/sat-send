@@ -37,3 +37,22 @@ export function FeeEstimatePanel({ fee }: Props) {
       </Card>
     );
   }
+
+  return (
+    <Card className="shadow-layer-1 animate-scale-in">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm font-medium">Fee Estimate</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        <Row label="Gross Amount" stx={formatStx(fee.grossAmount)} micro={formatMicroStx(fee.grossMicroStx)} />
+        <Row label={`Platform Fee (${fee.feeBps / 100}%)`} stx={formatStx(fee.feeAmount)} micro={formatMicroStx(fee.feeMicroStx)} />
+        <Separator />
+        <Row label="Recipient Gets" stx={formatStx(fee.netAmount)} micro={formatMicroStx(fee.netMicroStx)} />
+        <div className="flex items-center justify-between border-t pt-2 text-sm font-semibold">
+          <span>Total Cost</span>
+          <span className="font-mono-tabular">{formatStx(fee.grossAmount)} STX</span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
