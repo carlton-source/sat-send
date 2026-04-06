@@ -118,3 +118,38 @@ export function Navbar() {
             <Radio className={cn("h-3 w-3", network === "mainnet" ? "text-success" : "text-warning")} />
             <span className="font-mono-tabular">{network === "mainnet" ? "Mainnet" : "Testnet"}</span>
           </button>
+
+          {/* Wallet */}
+          {isConnected && principal ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2 font-mono-tabular text-xs">
+                  <Wallet className="h-3.5 w-3.5" />
+                  {truncatePrincipal(principal)}
+                  <ChevronDown className="h-3 w-3 text-muted-foreground" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="px-2 py-1.5">
+                  <p className="text-xs text-muted-foreground">Connected as</p>
+                  <p className="mt-0.5 break-all font-mono-tabular text-xs">{principal}</p>
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={disconnect} className="text-destructive focus:text-destructive">
+                  <LogOut className="mr-2 h-3.5 w-3.5" />
+                  Disconnect
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button size="sm" onClick={connect} disabled={isConnecting} className="gap-2">
+              <Wallet className="h-3.5 w-3.5" />
+              {isConnecting ? "Connecting…" : "Connect Wallet"}
+            </Button>
+          )}
+        </div>
+      </div>
+
+    </header>
+  );
+}
