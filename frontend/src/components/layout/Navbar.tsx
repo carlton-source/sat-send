@@ -80,3 +80,21 @@ export function Navbar() {
             ))}
           </nav>
         </div>
+
+        {/* Search bar - desktop */}
+        <div className="hidden md:flex items-center flex-1 max-w-xs mx-4">
+          <div className="relative w-full">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+            <Input
+              ref={searchInputRef}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              placeholder="Search address…"
+              className="h-8 pl-8 pr-16 text-xs bg-secondary/50 border-transparent focus-visible:border-input"
+            />
+            <kbd className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 hidden select-none items-center gap-0.5 rounded border bg-muted px-1.5 py-0.5 font-mono text-[10px] font-medium text-muted-foreground sm:flex">
+              ⌘K
+            </kbd>
+          </div>
+        </div>
