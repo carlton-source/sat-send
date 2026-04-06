@@ -20,3 +20,9 @@ export function RecipientInput({ value, onChange, onBlur, name }: RecipientInput
 
   const query = value.toLowerCase();
   const filtered = recipients.filter((r) => r.address.toLowerCase().includes(query));
+
+  function select(address: string) {
+    onChange(address);
+    setOpen(false);
+    inputRef.current?.focus();
+  }
