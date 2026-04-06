@@ -27,3 +27,22 @@ export function TransactionStatus({ status, txId, error, onReset }: Props) {
   const config = STATUS_CONFIG[status];
   const Icon = config.icon;
   const isSpinning = ["signing", "submitted", "pending"].includes(status);
+
+  return (
+    <Card className="shadow-layer-2 animate-slide-up">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm font-medium">Transaction Status</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <div role="status" aria-live="polite" className="flex items-center gap-2">
+          <Icon
+            className={cn(
+              "h-5 w-5",
+              config.color,
+              isSpinning && "animate-spin",
+              status === "confirmed" && "animate-pulse-glow",
+              status === "failed" && "animate-pulse-glow"
+            )}
+          />
+          <span className={cn("text-sm font-semibold", config.color)}>{config.label}</span>
+        </div>
