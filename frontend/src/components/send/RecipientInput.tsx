@@ -26,3 +26,5 @@ export function RecipientInput({ value, onChange, onBlur, name }: RecipientInput
     setOpen(false);
     inputRef.current?.focus();
   }
+
+  const hasRecipients = recipients.length > 0;
