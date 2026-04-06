@@ -74,3 +74,13 @@ export function TransactionStatus({ status, txId, error, onReset }: Props) {
             </p>
           </div>
         )}
+
+        {(status === "confirmed" || status === "failed") && (
+          <Button variant="outline" size="sm" onClick={onReset} className="w-full">
+            {status === "confirmed" ? "Send Another Tip" : "Try Again"}
+          </Button>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
