@@ -4,3 +4,10 @@ import { ExternalLink, CheckCircle2, XCircle, Loader2, Clock } from "lucide-reac
 import { STACKS_EXPLORER_URL } from "@/lib/constants";
 import type { TxStatus } from "@/services/mock-contract";
 import { cn } from "@/lib/utils";
+
+interface Props {
+  status: TxStatus;
+  txId: string | null;
+  error?: string;
+  onReset: () => void;
+}
