@@ -52,3 +52,31 @@ export function Navbar() {
       toast({ title: "Invalid address", description: "Please enter a valid Stacks address", variant: "destructive" });
     }
   }
+
+  return (
+    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md shadow-layer-1">
+      <div className="container flex h-14 items-center justify-between gap-4">
+        {/* Logo + Nav */}
+        <div className="flex items-center gap-6">
+          <Link to="/" className="flex items-center gap-2 font-semibold text-foreground transition-smooth hover:text-primary">
+            <Zap className="h-5 w-5 text-primary" />
+            <span className="text-base tracking-tight">SatSend</span>
+          </Link>
+
+          <nav className="hidden items-center gap-1 md:flex">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-200",
+                  location.pathname === item.path
+                    ? "bg-secondary text-foreground"
+                    : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
