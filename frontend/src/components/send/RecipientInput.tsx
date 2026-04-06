@@ -17,3 +17,6 @@ export function RecipientInput({ value, onChange, onBlur, name }: RecipientInput
   const { recipients } = useRecentRecipients();
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const query = value.toLowerCase();
+  const filtered = recipients.filter((r) => r.address.toLowerCase().includes(query));
