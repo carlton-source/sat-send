@@ -65,3 +65,12 @@ export function TransactionStatus({ status, txId, error, onReset }: Props) {
             </div>
           </div>
         )}
+
+        {error && (
+          <div className="rounded-md bg-destructive/10 p-3 animate-fade-in">
+            <p className="text-xs font-medium text-destructive">{error}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Please check your wallet connection and try again.
+            </p>
+          </div>
+        )}
