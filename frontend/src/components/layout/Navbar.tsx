@@ -98,3 +98,23 @@ export function Navbar() {
             </kbd>
           </div>
         </div>
+
+        {/* Right side */}
+        <div className="flex items-center gap-2">
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+
+          {/* Network badge */}
+          <button
+            onClick={toggleNetwork}
+            className="flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs font-medium transition-all duration-200 hover:bg-secondary"
+          >
+            <Radio className={cn("h-3 w-3", network === "mainnet" ? "text-success" : "text-warning")} />
+            <span className="font-mono-tabular">{network === "mainnet" ? "Mainnet" : "Testnet"}</span>
+          </button>
