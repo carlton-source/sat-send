@@ -14,3 +14,20 @@ import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Index />} />
+        <Route path="/send" element={<SendTip />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/profile/:principal" element={<UserProfile />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
