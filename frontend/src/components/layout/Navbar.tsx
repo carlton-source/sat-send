@@ -42,3 +42,13 @@ export function Navbar() {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
+  function handleSearch() {
+    const trimmed = searchQuery.trim();
+    if (!trimmed) return;
+    if (isValidStacksAddress(trimmed)) {
+      navigate(`/profile/${trimmed}`);
+      setSearchQuery("");
+    } else {
+      toast({ title: "Invalid address", description: "Please enter a valid Stacks address", variant: "destructive" });
+    }
+  }
