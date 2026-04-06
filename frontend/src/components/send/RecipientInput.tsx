@@ -12,3 +12,8 @@ interface RecipientInputProps {
   onBlur: () => void;
   name: string;
 }
+
+export function RecipientInput({ value, onChange, onBlur, name }: RecipientInputProps) {
+  const { recipients } = useRecentRecipients();
+  const [open, setOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
