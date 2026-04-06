@@ -46,3 +46,22 @@ export function TransactionStatus({ status, txId, error, onReset }: Props) {
           />
           <span className={cn("text-sm font-semibold", config.color)}>{config.label}</span>
         </div>
+
+        {txId && (
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">Transaction ID</p>
+            <div className="flex items-center gap-2">
+              <code className="flex-1 truncate rounded bg-secondary px-2 py-1 font-mono-tabular text-xs">
+                {txId}
+              </code>
+              <a
+                href={`${STACKS_EXPLORER_URL}/txid/${txId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary transition-colors hover:text-primary/80"
+              >
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+        )}
