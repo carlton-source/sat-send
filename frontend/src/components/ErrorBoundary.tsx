@@ -6,3 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 interface Props {
   children: React.ReactNode;
 }
+
+interface State {
+  hasError: boolean
+  error: Error | null;
+}
