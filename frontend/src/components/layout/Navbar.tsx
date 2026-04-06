@@ -23,3 +23,11 @@ const NAV_ITEMS = [
   { path: "/leaderboard", label: "Leaderboard" },
   { path: "/explore", label: "Explore" },
 ];
+
+export function Navbar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { isConnected, principal, network, isConnecting, connect, disconnect, toggleNetwork } = useWalletStore();
+  const { theme, toggleTheme } = useThemeStore();
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
