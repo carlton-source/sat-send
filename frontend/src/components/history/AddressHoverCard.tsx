@@ -16,3 +16,10 @@ interface AddressHoverCardProps {
   principal: string;
   children?: React.ReactNode;
 }
+
+export function AddressHoverCard({ principal, children }: AddressHoverCardProps) {
+  const stats = useQuery({
+    queryKey: ["user-stats-hover", principal],
+    queryFn: () => getUserStats(principal),
+    staleTime: 60_000,
+  });
