@@ -15,3 +15,8 @@ function timeAgo(ts: number): string {
   if (hours < 24) return `${hours}h ago`;
   return `${Math.floor(hours / 24)}d ago`;
 }
+
+interface Props {
+  tips: RecentTip[];
+  isLoading: boolean;
+}
