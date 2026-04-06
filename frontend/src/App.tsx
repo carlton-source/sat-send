@@ -12,3 +12,5 @@ import History from "./pages/History";
 import Leaderboard from "./pages/Leaderboard";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
