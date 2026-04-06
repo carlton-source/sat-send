@@ -11,3 +11,12 @@ interface Props {
   error?: string;
   onReset: () => void;
 }
+
+const STATUS_CONFIG: Record<TxStatus, { label: string; icon: React.ElementType; color: string }> = {
+  idle: { label: "Ready", icon: Clock, color: "text-muted-foreground" },
+  signing: { label: "Awaiting Signature", icon: Loader2, color: "text-warning" },
+  submitted: { label: "Submitted", icon: Loader2, color: "text-primary" },
+  pending: { label: "Pending Confirmation", icon: Loader2, color: "text-primary" },
+  confirmed: { label: "Confirmed", icon: CheckCircle2, color: "text-success" },
+  failed: { label: "Failed", icon: XCircle, color: "text-destructive" },
+};
