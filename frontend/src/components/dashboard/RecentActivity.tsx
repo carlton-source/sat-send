@@ -20,3 +20,67 @@ interface Props {
   tips: RecentTip[];
   isLoading: boolean;
 }
+
+export function RecentActivity({ tips, isLoading }: Props) {
+  return (
+    <Card className="shadow-layer-2">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm font-medium">Recent Activity</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-0 p-0">
+        {isLoading
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="flex items-center gap-3 border-t px-4 py-3">
+                <Skeleton className="h-8 w-8 rounded-full" />
+                <div className="flex-1 space-y-1">
+                  <Skeleton className="h-3 w-40" />
+                  <Skeleton className="h-3 w-24" />
+                </div>
+                <Skeleton className="h-4 w-16" />
+              </div>
+            ))
+          : tips.length === 0 ? (
+              <div className="flex flex-col items-center gap-3 py-10 text-center">
+                <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
+                  <Inbox className="h-6 w-6 text-muted-foreground/40" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">No activity yet</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground/60">Tips will appear here as they happen</p>
+                </div>
+              </div>
+            )
+          : tips.map((tip, i) => (
+              <div
+                key={tip.id}
+                className="flex items-center gap-3 border-t px-4 py-3 transition-all duration-200 hover:bg-secondary/30 animate-fade-in"
+                style={{ animationDelay: `${i * 50}ms` }}
+              >
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <ArrowRight className="h-3.5 w-3.5 text-primary" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1 text-xs">
+                    <span className="font-mono-tabular font-medium">{truncatePrincipal(tip.sender)}</span>
+                    <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                    <span className="font-mono-tabular font-medium">{truncatePrincipal(tip.recipient)}</span>
+                  </div>
+                  {tip.message && (
+                    <p className="mt-0.5 flex items-center gap-1 truncate text-xs text-muted-foreground">
+                      <MessageSquare className="h-3 w-3 shrink-0" />
+                      {tip.message}
+                    </p>
+                  )}
+                </div>
+                <div className="text-right">
+                  <p className="font-mono-tabular text-sm font-semibold">
+                    {formatStx(tip.amountMicroStx / MICRO_STX_PER_STX)} STX
+                  </p>
+                  <p className="font-mono-tabular text-xs text-muted-foreground">{timeAgo(tip.timestamp)}</p>
+                </div>
+              </div>
+            ))}
+      </CardContent>
+    </Card>
+  );
+}
