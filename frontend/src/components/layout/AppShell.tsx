@@ -10,3 +10,6 @@ const BOTTOM_TABS = [
   { path: "/leaderboard", label: "Board", icon: Trophy },
   { path: "/explore", label: "Explore", icon: Compass },
 ];
+
+export function AppShell({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
