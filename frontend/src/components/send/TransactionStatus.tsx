@@ -20,3 +20,6 @@ const STATUS_CONFIG: Record<TxStatus, { label: string; icon: React.ElementType; 
   confirmed: { label: "Confirmed", icon: CheckCircle2, color: "text-success" },
   failed: { label: "Failed", icon: XCircle, color: "text-destructive" },
 };
+
+export function TransactionStatus({ status, txId, error, onReset }: Props) {
+  if (status === "idle") return null;
