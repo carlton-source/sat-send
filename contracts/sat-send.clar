@@ -130,5 +130,123 @@
 
             ;; Recipient statistics
             (recipient-received (default-to u0 (map-get? user-total-received recipient)))
-             (recipient-count (default-to u0 (map-get? user-received-count recipient)))
+            (recipient-count (default-to u0 (map-get? user-received-count recipient)))
         )
+
+        ;; -------------------------------------------------
+        ;; Validation Checks
+        ;; -------------------------------------------------
+
+        ;; Ensure the amount is greater than zero
+        (asserts! (> amount u0) err-invalid-amount)
+
+        ;; Prevent users from tipping themselves
+        (asserts! (not (is-eq tx-sender recipient)) err-invalid-amount)
+
+        ;; -------------------------------------------------
+        ;; STX Transfers
+        ;; -------------------------------------------------
+
+        ;; Transfer the net amount to the recipient
+        (try! (stx-transfer? net-amount tx-sender recipient))
+
+        ;; Transfer the platform fee to the protocol owner
+        ;; Skip if the sender is the contract owner
+        (if is-owner
+            true
+            (try! (stx-transfer? fee tx-sender contract-owner))
+        )
+
+        ;; -------------------------------------------------
+        ;; Record the Tip
+        ;; -------------------------------------------------
+
+        (map-set tips
+            { tip-id: tip-id }
+            {
+                sender: tx-sender,
+                recipient: recipient,
+                amount: amount,
+                message: message,
+                tip-height: stacks-block-height
+            }
+        )
+
+        ;; -------------------------------------------------
+        ;; Update User Statistics
+        ;; -------------------------------------------------
+
+        (map-set user-total-sent tx-sender (+ sender-sent amount))
+        (map-set user-total-received recipient (+ recipient-received amount))
+
+        (map-set user-tip-count tx-sender (+ sender-count u1))
+        (map-set user-received-count recipient (+ recipient-count u1))
+
+        ;; -------------------------------------------------
+        ;; Update Global Protocol Statistics
+        ;; -------------------------------------------------
+
+        (var-set total-tips-sent (+ tip-id u1))
+        (var-set total-volume (+ (var-get total-volume) amount))
+        (var-set platform-fees (+ (var-get platform-fees) fee))
+
+        ;; Return the tip ID for reference
+        (ok tip-id)
+    )
+)
+
+;; ---------------------------------------------------------
+;; Read-Only Functions
+;; ---------------------------------------------------------
+
+;; get-tip
+;;
+;; Retrieves the details of a specific tip using its ID.
+(define-read-only (get-tip (tip-id uint))
+    (map-get? tips { tip-id: tip-id })
+)
+
+;; get-user-stats
+;;
+;; Returns tipping statistics for a specific user within the
+;; SatSend protocol.
+(define-read-only (get-user-stats (user principal))
+    {
+        tips-sent: (default-to u0 (map-get? user-tip-count user)),
+        tips-received: (default-to u0 (map-get? user-received-count user)),
+        total-sent: (default-to u0 (map-get? user-total-sent user)),
+        total-received: (default-to u0 (map-get? user-total-received user))
+    }
+)
+
+;; get-platform-stats
+;;
+;; Returns global statistics for the SatSend protocol.
+(define-read-only (get-platform-stats)
+    {
+        total-tips: (var-get total-tips-sent),
+        total-volume: (var-get total-volume),
+        platform-fees: (var-get platform-fees)
+    }
+)
+
+;; get-user-sent-total
+;;
+;; Returns the total amount of STX a user has sent through SatSend.
+(define-read-only (get-user-sent-total (user principal))
+    (ok (default-to u0 (map-get? user-total-sent user)))
+)
+
+;; get-user-received-total
+;;
+;; Returns the total amount of STX a user has received through SatSend.
+(define-read-only (get-user-received-total (user principal))
+    (ok (default-to u0 (map-get? user-total-received user)))
+)
+
+;; get-fee-for-amount
+;;
+;; Utility function that calculates the platform fee for a given amount.
+(define-read-only (get-fee-for-amount (amount uint))
+    (ok (calculate-fee amount))
+)
