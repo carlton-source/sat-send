@@ -23,3 +23,7 @@ const STATUS_CONFIG: Record<TxStatus, { label: string; icon: React.ElementType; 
 
 export function TransactionStatus({ status, txId, error, onReset }: Props) {
   if (status === "idle") return null;
+
+  const config = STATUS_CONFIG[status];
+  const Icon = config.icon;
+  const isSpinning = ["signing", "submitted", "pending"].includes(status);
