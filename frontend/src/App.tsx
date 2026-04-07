@@ -13,7 +13,15 @@ import Leaderboard from "./pages/Leaderboard";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      staleTime: 2 * 60 * 1000, // 2 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function AnimatedRoutes() {
   const location = useLocation();
