@@ -1,8 +1,10 @@
 import {
   fetchCallReadOnlyFunction,
+  ClarityType,
   cvToValue,
   Cl,
   Pc,
+  type ClarityValue,
 } from "@stacks/transactions";
 import { request } from "@stacks/connect";
 import {
@@ -39,14 +41,68 @@ function parseUintRepr(repr: string): number {
   return parseInt(repr.replace(/^u/, ""), 10) || 0;
 }
 
-/** Parse a Clarity string-utf8 repr like 'u"Hello world"' → "Hello world" */
+/** Parse a Clarity string-utf8 repr like 'u"Hello world"' → "Hello world" (decodes UTF-8 byte escapes) */
 function parseStringUtf8Repr(repr: string): string {
   const match = repr.match(/^u?"(.*)"$/s);
-  return match ? match[1] : "";
+  if (!match) return "";
+  // Clarity encodes non-ASCII as \u{hexbytes} where hexbytes are raw UTF-8 bytes (not code points)
+  return match[1].replace(/\\u\{([0-9a-fA-F]+)\}/g, (_, hex: string) => {
+    const pairs = hex.match(/.{2}/g) ?? [];
+    const bytes = new Uint8Array(pairs.map((b) => parseInt(b, 16)));
+    return new TextDecoder().decode(bytes);
+  });
 }
 
-async function callReadOnly(functionName: string, functionArgs: ReturnType<typeof Cl.uint>[]): Promise<unknown> {
-  const result = await fetchCallReadOnlyFunction({
+/** Strip leading apostrophe from a Clarity principal repr (e.g. 'SP... → SP...) */
+function parsePrincipalRepr(repr: string): string {
+  return repr.replace(/^'/, "");
+}
+
+// Version-agnostic ClarityValue accessors — handles both cvToValue output and raw ClarityValue objects
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeTupleField(cv: any, field: string): any {
+  // Raw ClarityValue TupleCV: { type, data: { [key]: ClarityValue } }
+  if (cv?.data?.[field] !== undefined) return cv.data[field];
+  // cvToValue output (plain object with converted values)
+  if (cv?.[field] !== undefined) return cv[field];
+  return undefined;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeUint(cv: any): number {
+  if (cv == null) return 0;
+  // Already a primitive
+  if (typeof cv === "bigint") return Number(cv);
+  if (typeof cv === "number") return cv;
+  if (typeof cv === "string") return parseInt(cv, 10) || 0;
+  // Raw UIntCV: { type, value: bigint }
+  const v = cv?.value;
+  if (typeof v === "bigint") return Number(v);
+  if (typeof v === "number") return v;
+  if (typeof v === "string") return parseInt(v, 10) || 0;
+  return 0;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeString(cv: any): string {
+  if (!cv) return "";
+  if (typeof cv === "string") return cv;
+  // Raw StringUtf8CV / StringAsciiCV: { type, data: string }
+  if (typeof cv.data === "string") return cv.data;
+  return "";
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safePrincipal(cv: any): string {
+  if (!cv) return "";
+  if (typeof cv === "string") return cv;
+  // cvToValue reliably handles principal → string conversion for all versions
+  try { return String(cvToValue(cv as ClarityValue)); } catch { /* fall through */ }
+  return "";
+}
+
+async function callReadOnly(functionName: string, functionArgs: ClarityValue[]): Promise<ClarityValue> {
+  return fetchCallReadOnlyFunction({
     contractAddress: CONTRACT_DEPLOYER,
     contractName: CONTRACT_NAME,
     functionName,
@@ -54,7 +110,6 @@ async function callReadOnly(functionName: string, functionArgs: ReturnType<typeo
     senderAddress: CONTRACT_DEPLOYER,
     network: getNetwork(),
   });
-  return cvToValue(result);
 }
 
 // ---------------------------------------------------------------------------
@@ -128,11 +183,7 @@ export interface TxResult {
 export async function getPlatformStats(): Promise<PlatformStats> {
   try {
     // get-platform-stats returns: { total-tips: uint, total-volume: uint, platform-fees: uint }
-    const raw = (await callReadOnly("get-platform-stats", [])) as {
-      "total-tips": bigint;
-      "total-volume": bigint;
-      "platform-fees": bigint;
-    };
+    const cv = await callReadOnly("get-platform-stats", []);
 
     // Count unique tippers from contract transactions
     let activeTippers = 0;
@@ -157,9 +208,9 @@ export async function getPlatformStats(): Promise<PlatformStats> {
     }
 
     return {
-      totalTips: Number(raw["total-tips"]),
-      totalVolumeMicroStx: Number(raw["total-volume"]),
-      totalFeesMicroStx: Number(raw["platform-fees"]),
+      totalTips: safeUint(safeTupleField(cv, "total-tips")),
+      totalVolumeMicroStx: safeUint(safeTupleField(cv, "total-volume")),
+      totalFeesMicroStx: safeUint(safeTupleField(cv, "platform-fees")),
       activeTippers,
     };
   } catch {
@@ -174,17 +225,12 @@ export async function getPlatformStats(): Promise<PlatformStats> {
 export async function getUserStats(principal: string): Promise<UserStats | null> {
   try {
     // get-user-stats always returns a tuple (uses default-to u0 for every field)
-    const raw = (await callReadOnly("get-user-stats", [Cl.principal(principal)])) as {
-      "tips-sent": bigint;
-      "tips-received": bigint;
-      "total-sent": bigint;
-      "total-received": bigint;
-    };
+    const cv = await callReadOnly("get-user-stats", [Cl.principal(principal)]);
     return {
-      tipsSent: Number(raw["tips-sent"]),
-      tipsReceived: Number(raw["tips-received"]),
-      totalSentMicroStx: Number(raw["total-sent"]),
-      totalReceivedMicroStx: Number(raw["total-received"]),
+      tipsSent: safeUint(safeTupleField(cv, "tips-sent")),
+      tipsReceived: safeUint(safeTupleField(cv, "tips-received")),
+      totalSentMicroStx: safeUint(safeTupleField(cv, "total-sent")),
+      totalReceivedMicroStx: safeUint(safeTupleField(cv, "total-received")),
     };
   } catch {
     return null;
@@ -198,28 +244,25 @@ export async function getUserStats(principal: string): Promise<UserStats | null>
 export async function getTip(tipId: number): Promise<TipRecord | null> {
   try {
     // get-tip returns (optional {...}) via map-get?
-    const raw = (await callReadOnly("get-tip", [Cl.uint(tipId)])) as {
-      sender: string;
-      recipient: string;
-      amount: bigint;
-      message: string;
-      "tip-height": bigint;
-    } | null;
+    const cv = await callReadOnly("get-tip", [Cl.uint(tipId)]);
+    // OptionalNone = tip not found
+    if (!cv || cv.type === ClarityType.OptionalNone) return null;
+    // OptionalSome wraps the inner TupleCV
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const inner: any = cv.type === ClarityType.OptionalSome ? (cv as any).value : cv;
 
-    if (!raw) return null;
-
-    const amountMicroStx = Number(raw.amount);
+    const amountMicroStx = safeUint(safeTupleField(inner, "amount"));
     const feeMicroStx = Math.floor((amountMicroStx * PLATFORM_FEE_BPS) / 10_000);
 
     return {
       id: tipId,
-      sender: raw.sender,
-      recipient: raw.recipient,
+      sender: safePrincipal(safeTupleField(inner, "sender")),
+      recipient: safePrincipal(safeTupleField(inner, "recipient")),
       amountMicroStx,
       feeMicroStx,
-      message: raw.message,
-      blockHeight: Number(raw["tip-height"]),
-      timestamp: 0, // block time not stored on-chain; would need extra API call
+      message: safeString(safeTupleField(inner, "message")),
+      blockHeight: safeUint(safeTupleField(inner, "tip-height")),
+      timestamp: 0,
     };
   } catch {
     return null;
@@ -248,7 +291,7 @@ export async function getRecentTips(): Promise<RecentTip[]> {
       if (tx.tx_status !== "success") continue;
 
       const args: { repr: string }[] = tx.contract_call.function_args ?? [];
-      const recipient = args[0]?.repr ?? "";
+      const recipient = parsePrincipalRepr(args[0]?.repr ?? "");
       const amountMicroStx = parseUintRepr(args[1]?.repr ?? "u0");
       const message = parseStringUtf8Repr(args[2]?.repr ?? 'u""');
 
@@ -291,7 +334,7 @@ export async function getTransactionHistory(principal: string): Promise<HistoryR
       if (tx.tx_status !== "success") continue;
 
       const args: { repr: string }[] = tx.contract_call.function_args ?? [];
-      const recipientAddr = args[0]?.repr ?? "";
+      const recipientAddr = parsePrincipalRepr(args[0]?.repr ?? "");
       const amountMicroStx = parseUintRepr(args[1]?.repr ?? "u0");
       const message = parseStringUtf8Repr(args[2]?.repr ?? 'u""');
       const feeMicroStx = Math.floor((amountMicroStx * PLATFORM_FEE_BPS) / 10_000);
@@ -343,7 +386,7 @@ export async function getLeaderboard(type: "senders" | "recipients"): Promise<Le
       const args: { repr: string }[] = tx.contract_call.function_args ?? [];
       const amountMicroStx = parseUintRepr(args[1]?.repr ?? "u0");
 
-      const key = type === "senders" ? tx.sender_address : (args[0]?.repr ?? "");
+      const key = type === "senders" ? tx.sender_address : parsePrincipalRepr(args[0]?.repr ?? "");
       if (!key) continue;
 
       const prev = stats.get(key) ?? { totalMicroStx: 0, tipCount: 0 };
