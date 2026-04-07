@@ -134,20 +134,23 @@ export async function getPlatformStats(): Promise<PlatformStats> {
       "platform-fees": bigint;
     };
 
-    // Also try to count unique tippers from recent transactions
+    // Also try to count unique tippers from recent contract call transactions
     let activeTippers = 0;
     try {
       const res = await fetch(
-        `${getApiUrl()}/extended/v1/address/${CONTRACT_ADDRESS}/transactions?limit=100`,
+        `${getApiUrl()}/extended/v1/tx?type=contract_call&limit=50`,
         { headers: apiHeaders() }
       );
       if (res.ok) {
         const data = await res.json();
         const senders = new Set<string>();
-        for (const item of data.results ?? []) {
-          const tx = item.tx ?? item;
-          if (tx.tx_type === "contract_call" && tx.tx_status === "success") {
-            senders.add(tx.sender_address);
+        for (const item of (data.results ?? []) as { tx_type: string; tx_status: string; contract_call?: { contract_id: string }; sender_address: string }[]) {
+          if (
+            item.tx_type === "contract_call" &&
+            item.tx_status === "success" &&
+            item.contract_call?.contract_id === CONTRACT_ADDRESS
+          ) {
+            senders.add(item.sender_address);
           }
         }
         activeTippers = senders.size;
@@ -232,8 +235,9 @@ export async function getTip(tipId: number): Promise<TipRecord | null> {
 
 export async function getRecentTips(): Promise<RecentTip[]> {
   try {
+    // Use the transactions endpoint filtered by type; then filter by contract_id client-side
     const res = await fetch(
-      `${getApiUrl()}/extended/v1/address/${CONTRACT_ADDRESS}/transactions?limit=20`,
+      `${getApiUrl()}/extended/v1/tx?type=contract_call&limit=50`,
       { headers: apiHeaders() }
     );
     if (!res.ok) return [];
@@ -243,6 +247,7 @@ export async function getRecentTips(): Promise<RecentTip[]> {
 
     for (const item of data.results ?? []) {
       const tx = item.tx ?? item;
+      if (tx.contract_call?.contract_id !== CONTRACT_ADDRESS) continue;
       if (tx.tx_type !== "contract_call") continue;
       if (tx.contract_call?.function_name !== "send-stx-tip") continue;
       if (tx.tx_status !== "success") continue;
@@ -326,7 +331,7 @@ export async function getTransactionHistory(principal: string): Promise<HistoryR
 export async function getLeaderboard(type: "senders" | "recipients"): Promise<LeaderboardEntry[]> {
   try {
     const res = await fetch(
-      `${getApiUrl()}/extended/v1/address/${CONTRACT_ADDRESS}/transactions?limit=100`,
+      `${getApiUrl()}/extended/v1/tx?type=contract_call&limit=100`,
       { headers: apiHeaders() }
     );
     if (!res.ok) return [];
@@ -336,6 +341,7 @@ export async function getLeaderboard(type: "senders" | "recipients"): Promise<Le
 
     for (const item of data.results ?? []) {
       const tx = item.tx ?? item;
+      if (tx.contract_call?.contract_id !== CONTRACT_ADDRESS) continue;
       if (tx.tx_type !== "contract_call") continue;
       if (tx.contract_call?.function_name !== "send-stx-tip") continue;
       if (tx.tx_status !== "success") continue;
