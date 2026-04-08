@@ -29,3 +29,9 @@ function getApiUrl(): string {
 function getNetwork(): "mainnet" | "testnet" {
   return useWalletStore.getState().network;
 }
+
+/** Build fetch headers — uses VITE_HIRO_API_KEY if set */
+function apiHeaders(): HeadersInit {
+  const key = import.meta.env.VITE_HIRO_API_KEY as string | undefined;
+  return key ? { "x-api-key": key } : {};
+}
