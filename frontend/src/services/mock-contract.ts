@@ -149,3 +149,14 @@ export interface RecentTip {
   message: string;
   timestamp: number;
 }
+
+export interface HistoryRecord {
+  id: number;
+  direction: "sent" | "received";
+  counterparty: string;
+  amountMicroStx: number;
+  feeMicroStx: number;
+  message: string;
+  txId: string;
+  timestamp: number;
+}
