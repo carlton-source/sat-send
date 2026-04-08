@@ -40,3 +40,15 @@ function apiHeaders(): HeadersInit {
 function parseUintRepr(repr: string): number {
   return parseInt(repr.replace(/^u/, ""), 10) || 0;
 }
+
+/** Parse a Clarity string-utf8 repr like 'u"Hello world"' → "Hello world" (decodes UTF-8 byte escapes) */
+function parseStringUtf8Repr(repr: string): string {
+  const match = repr.match(/^u?"(.*)"$/s);
+  if (!match) return "";
+  // Clarity encodes non-ASCII as \u{hexbytes} where hexbytes are raw UTF-8 bytes (not code points)
+  return match[1].replace(/\\u\{([0-9a-fA-F]+)\}/g, (_, hex: string) => {
+    const pairs = hex.match(/.{2}/g) ?? [];
+    const bytes = new Uint8Array(pairs.map((b) => parseInt(b, 16)));
+    return new TextDecoder().decode(bytes);
+  });
+}
