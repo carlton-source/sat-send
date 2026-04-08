@@ -32,3 +32,7 @@ export function formatStx(amount: number): string {
     maximumFractionDigits: 6,
   });
 }
+
+export function formatMicroStx(microStx: number): string {
+  return microStx.toLocaleString();
+}
