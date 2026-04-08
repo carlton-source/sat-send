@@ -8,20 +8,24 @@ export const stacksAddressSchema = z
   .min(1, "Recipient address is required")
   .regex(STACKS_ADDRESS_REGEX, "Invalid Stacks address format");
 
-  export const tipAmountSchema = z
+export const tipAmountSchema = z
   .number({ message: "Amount must be a number" })
   .positive("Amount must be greater than 0")
   .min(MIN_TIP_AMOUNT, `Minimum tip is ${MIN_TIP_AMOUNT} STX`);
 
-  export const tipMessageSchema = z
+export const tipMessageSchema = z
   .string()
   .max(MAX_MESSAGE_LENGTH, `Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`)
   .optional();
 
-  export const sendTipSchema = z.object({
+export const sendTipSchema = z.object({
   recipient: stacksAddressSchema,
   amount: tipAmountSchema,
   message: tipMessageSchema,
 });
 
 export type SendTipFormData = z.infer<typeof sendTipSchema>;
+
+export function isValidStacksAddress(address: string): boolean {
+  return STACKS_ADDRESS_REGEX.test(address);
+}
