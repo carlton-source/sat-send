@@ -60,3 +60,9 @@ export function RecentActivity({ tips, isLoading }: Props) {
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
                   <ArrowRight className="h-3.5 w-3.5 text-primary" />
                 </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1 text-xs">
+                    <span className="font-mono-tabular font-medium">{truncatePrincipal(tip.sender)}</span>
+                    <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                    <span className="font-mono-tabular font-medium">{truncatePrincipal(tip.recipient)}</span>
+                  </div>
