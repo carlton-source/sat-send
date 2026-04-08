@@ -55,7 +55,6 @@ export function RecentActivity({ tips, isLoading }: Props) {
                 key={tip.id}
                 className="flex items-center gap-3 border-t px-4 py-3 transition-all duration-200 hover:bg-secondary/30 animate-fade-in"
                 style={{ animationDelay: `${i * 50}ms` }}
-              ></div>
               >
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
                   <ArrowRight className="h-3.5 w-3.5 text-primary" />
@@ -66,3 +65,22 @@ export function RecentActivity({ tips, isLoading }: Props) {
                     <ArrowRight className="h-3 w-3 text-muted-foreground" />
                     <span className="font-mono-tabular font-medium">{truncatePrincipal(tip.recipient)}</span>
                   </div>
+                  {tip.message && (
+                    <p className="mt-0.5 flex items-center gap-1 truncate text-xs text-muted-foreground">
+                      <MessageSquare className="h-3 w-3 shrink-0" />
+                      {tip.message}
+                    </p>
+                  )}
+                </div>
+                <div className="text-right">
+                  <p className="font-mono-tabular text-sm font-semibold">
+                    {formatStx(tip.amountMicroStx / MICRO_STX_PER_STX)} STX
+                  </p>
+                  <p className="font-mono-tabular text-xs text-muted-foreground">{timeAgo(tip.timestamp)}</p>
+                </div>
+              </div>
+            ))}
+      </CardContent>
+    </Card>
+  );
+}
