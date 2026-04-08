@@ -91,3 +91,12 @@ function safeString(cv: any): string {
   if (typeof cv.data === "string") return cv.data;
   return "";
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safePrincipal(cv: any): string {
+  if (!cv) return "";
+  if (typeof cv === "string") return cv;
+  // cvToValue reliably handles principal → string conversion for all versions
+  try { return String(cvToValue(cv as ClarityValue)); } catch { /* fall through */ }
+  return "";
+}
