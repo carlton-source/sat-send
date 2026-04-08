@@ -160,3 +160,10 @@ export interface HistoryRecord {
   txId: string;
   timestamp: number;
 }
+
+export interface LeaderboardEntry {
+  rank: number;
+  principal: string;
+  totalMicroStx: number;
+  tipCount: number;
+}
