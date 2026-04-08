@@ -20,3 +20,22 @@ interface Props {
   tips: RecentTip[];
   isLoading: boolean;
 }
+
+export function RecentActivity({ tips, isLoading }: Props) {
+  return (
+    <Card className="shadow-layer-2">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm font-medium">Recent Activity</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-0 p-0">
+        {isLoading
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="flex items-center gap-3 border-t px-4 py-3">
+                <Skeleton className="h-8 w-8 rounded-full" />
+                <div className="flex-1 space-y-1">
+                  <Skeleton className="h-3 w-40" />
+                  <Skeleton className="h-3 w-24" />
+                </div>
+                <Skeleton className="h-4 w-16" />
+              </div>
+            ))
