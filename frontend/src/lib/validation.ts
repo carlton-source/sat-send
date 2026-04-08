@@ -17,3 +17,9 @@ export const stacksAddressSchema = z
   .string()
   .max(MAX_MESSAGE_LENGTH, `Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`)
   .optional();
+
+  export const sendTipSchema = z.object({
+  recipient: stacksAddressSchema,
+  amount: tipAmountSchema,
+  message: tipMessageSchema,
+});
