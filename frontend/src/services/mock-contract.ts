@@ -82,3 +82,12 @@ function safeUint(cv: any): number {
   if (typeof v === "string") return parseInt(v, 10) || 0;
   return 0;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeString(cv: any): string {
+  if (!cv) return "";
+  if (typeof cv === "string") return cv;
+  // Raw StringUtf8CV / StringAsciiCV: { type, data: string }
+  if (typeof cv.data === "string") return cv.data;
+  return "";
+}
