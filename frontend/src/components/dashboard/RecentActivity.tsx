@@ -39,3 +39,14 @@ export function RecentActivity({ tips, isLoading }: Props) {
                 <Skeleton className="h-4 w-16" />
               </div>
             ))
+          : tips.length === 0 ? (
+              <div className="flex flex-col items-center gap-3 py-10 text-center">
+                <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
+                  <Inbox className="h-6 w-6 text-muted-foreground/40" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">No activity yet</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground/60">Tips will appear here as they happen</p>
+                </div>
+              </div>
+            )
