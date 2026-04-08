@@ -17,3 +17,5 @@ export const NETWORKS = {
   mainnet: { label: "Mainnet", color: "success" },
   testnet: { label: "Testnet", color: "warning" },
 } as const;
+
+export type NetworkType = keyof typeof NETWORKS;
