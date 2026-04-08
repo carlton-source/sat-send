@@ -52,3 +52,8 @@ function parseStringUtf8Repr(repr: string): string {
     return new TextDecoder().decode(bytes);
   });
 }
+
+/** Strip leading apostrophe from a Clarity principal repr (e.g. 'SP... → SP...) */
+function parsePrincipalRepr(repr: string): string {
+  return repr.replace(/^'/, "");
+}
