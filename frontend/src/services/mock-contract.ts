@@ -111,3 +111,14 @@ async function callReadOnly(functionName: string, functionArgs: ClarityValue[]):
     network: getNetwork(),
   });
 }
+
+// ---------------------------------------------------------------------------
+// Interfaces (preserved from original for page compatibility)
+// ---------------------------------------------------------------------------
+
+export interface PlatformStats {
+  totalTips: number;
+  totalVolumeMicroStx: number;
+  totalFeesMicroStx: number;
+  activeTippers: number;
+}
