@@ -25,3 +25,7 @@ function getApiUrl(): string {
   const network = useWalletStore.getState().network;
   return network === "mainnet" ? HIRO_API_MAINNET : HIRO_API_TESTNET;
 }
+
+function getNetwork(): "mainnet" | "testnet" {
+  return useWalletStore.getState().network;
+}
