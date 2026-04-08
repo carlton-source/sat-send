@@ -35,3 +35,8 @@ function apiHeaders(): HeadersInit {
   const key = import.meta.env.VITE_HIRO_API_KEY as string | undefined;
   return key ? { "x-api-key": key } : {};
 }
+
+/** Parse a Clarity uint repr string like "u5000000" → 5000000 */
+function parseUintRepr(repr: string): number {
+  return parseInt(repr.replace(/^u/, ""), 10) || 0;
+}
