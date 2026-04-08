@@ -100,3 +100,14 @@ function safePrincipal(cv: any): string {
   try { return String(cvToValue(cv as ClarityValue)); } catch { /* fall through */ }
   return "";
 }
+
+async function callReadOnly(functionName: string, functionArgs: ClarityValue[]): Promise<ClarityValue> {
+  return fetchCallReadOnlyFunction({
+    contractAddress: CONTRACT_DEPLOYER,
+    contractName: CONTRACT_NAME,
+    functionName,
+    functionArgs,
+    senderAddress: CONTRACT_DEPLOYER,
+    network: getNetwork(),
+  });
+}
