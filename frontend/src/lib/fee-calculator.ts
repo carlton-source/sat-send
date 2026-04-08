@@ -25,3 +25,10 @@ export function calculateFee(amountStx: number): FeeBreakdown {
     netMicroStx,
   };
 }
+
+export function formatStx(amount: number): string {
+  return amount.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 6,
+  });
+}
