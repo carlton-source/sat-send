@@ -140,3 +140,12 @@ export interface TipRecord {
   blockHeight: number;
   timestamp: number;
 }
+
+export interface RecentTip {
+  id: number;
+  sender: string;
+  recipient: string;
+  amountMicroStx: number;
+  message: string;
+  timestamp: number;
+}
