@@ -122,3 +122,10 @@ export interface PlatformStats {
   totalFeesMicroStx: number;
   activeTippers: number;
 }
+
+export interface UserStats {
+  tipsSent: number;
+  tipsReceived: number;
+  totalSentMicroStx: number;
+  totalReceivedMicroStx: number;
+}
