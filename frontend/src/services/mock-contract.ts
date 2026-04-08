@@ -129,3 +129,14 @@ export interface UserStats {
   totalSentMicroStx: number;
   totalReceivedMicroStx: number;
 }
+
+export interface TipRecord {
+  id: number;
+  sender: string;
+  recipient: string;
+  amountMicroStx: number;
+  feeMicroStx: number;
+  message: string;
+  blockHeight: number;
+  timestamp: number;
+}
