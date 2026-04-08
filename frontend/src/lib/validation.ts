@@ -12,3 +12,8 @@ export const stacksAddressSchema = z
   .number({ message: "Amount must be a number" })
   .positive("Amount must be greater than 0")
   .min(MIN_TIP_AMOUNT, `Minimum tip is ${MIN_TIP_AMOUNT} STX`);
+
+  export const tipMessageSchema = z
+  .string()
+  .max(MAX_MESSAGE_LENGTH, `Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`)
+  .optional();
