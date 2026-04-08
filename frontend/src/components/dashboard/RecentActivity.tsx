@@ -50,3 +50,9 @@ export function RecentActivity({ tips, isLoading }: Props) {
                 </div>
               </div>
             )
+          : tips.map((tip, i) => (
+              <div
+                key={tip.id}
+                className="flex items-center gap-3 border-t px-4 py-3 transition-all duration-200 hover:bg-secondary/30 animate-fade-in"
+                style={{ animationDelay: `${i * 50}ms` }}
+              ></div>
