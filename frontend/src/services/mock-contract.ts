@@ -67,3 +67,18 @@ function safeTupleField(cv: any, field: string): any {
   if (cv?.[field] !== undefined) return cv[field];
   return undefined;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeUint(cv: any): number {
+  if (cv == null) return 0;
+  // Already a primitive
+  if (typeof cv === "bigint") return Number(cv);
+  if (typeof cv === "number") return cv;
+  if (typeof cv === "string") return parseInt(cv, 10) || 0;
+  // Raw UIntCV: { type, value: bigint }
+  const v = cv?.value;
+  if (typeof v === "bigint") return Number(v);
+  if (typeof v === "number") return v;
+  if (typeof v === "string") return parseInt(v, 10) || 0;
+  return 0;
+}
