@@ -57,3 +57,13 @@ function parseStringUtf8Repr(repr: string): string {
 function parsePrincipalRepr(repr: string): string {
   return repr.replace(/^'/, "");
 }
+
+// Version-agnostic ClarityValue accessors — handles both cvToValue output and raw ClarityValue objects
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeTupleField(cv: any, field: string): any {
+  // Raw ClarityValue TupleCV: { type, data: { [key]: ClarityValue } }
+  if (cv?.data?.[field] !== undefined) return cv.data[field];
+  // cvToValue output (plain object with converted values)
+  if (cv?.[field] !== undefined) return cv[field];
+  return undefined;
+}
