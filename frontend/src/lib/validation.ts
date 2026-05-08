@@ -12,3 +12,9 @@ export const stacksAddressSchema = z
   .number({ message: "Amount must be a number" })
   .positive("Amount must be greater than 0")
   .min(MIN_TIP_AMOUNT, `Minimum tip is ${MIN_TIP_AMOUNT} STX`);
+
+  export const sendTipSchema = z.object({
+  recipient: stacksAddressSchema,
+  amount: tipAmountSchema,
+  message: tipMessageSchema,
+});
