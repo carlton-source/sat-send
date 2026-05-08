@@ -15,6 +15,7 @@ export function calculateFee(amountStx: number): FeeBreakdown {
   const feeMicroStx = Math.floor((grossMicroStx * PLATFORM_FEE_BPS) / 10_000);
   const netMicroStx = grossMicroStx - feeMicroStx;
 
+  return {
     grossAmount: amountStx,
     feeAmount: feeMicroStx / MICRO_STX_PER_STX,
     netAmount: netMicroStx / MICRO_STX_PER_STX,
@@ -30,4 +31,8 @@ export function formatStx(amount: number): string {
     minimumFractionDigits: 2,
     maximumFractionDigits: 6,
   });
+}
+
+export function formatMicroStx(microStx: number): string {
+  return microStx.toLocaleString();
 }
