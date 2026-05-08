@@ -18,3 +18,5 @@ export const stacksAddressSchema = z
   amount: tipAmountSchema,
   message: tipMessageSchema,
 });
+
+export type SendTipFormData = z.infer<typeof sendTipSchema>;
