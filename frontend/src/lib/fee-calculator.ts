@@ -9,3 +9,8 @@ export interface FeeBreakdown {
   feeMicroStx: number;
   netMicroStx: number;
 }
+
+export function calculateFee(amountStx: number): FeeBreakdown {
+  const grossMicroStx = Math.round(amountStx * MICRO_STX_PER_STX);
+  const feeMicroStx = Math.floor((grossMicroStx * PLATFORM_FEE_BPS) / 10_000);
+  const netMicroStx = grossMicroStx - feeMicroStx;
