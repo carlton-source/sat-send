@@ -12,3 +12,8 @@ export const CONTRACT_ADDRESS = `${CONTRACT_DEPLOYER}.${CONTRACT_NAME}`;
 // Hiro Stacks Blockchain API
 export const HIRO_API_MAINNET = "https://api.hiro.so";
 export const HIRO_API_TESTNET = "https://api.testnet.hiro.so";
+
+export const NETWORKS = {
+  mainnet: { label: "Mainnet", color: "success" },
+  testnet: { label: "Testnet", color: "warning" },
+} as const;
