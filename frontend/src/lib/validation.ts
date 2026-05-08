@@ -25,3 +25,7 @@ export const sendTipSchema = z.object({
 });
 
 export type SendTipFormData = z.infer<typeof sendTipSchema>;
+
+export function isValidStacksAddress(address: string): boolean {
+  return STACKS_ADDRESS_REGEX.test(address);
+}
