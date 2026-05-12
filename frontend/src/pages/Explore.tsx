@@ -86,3 +86,16 @@ export default function Explore() {
                           to={`/profile/${user.principal}`}
                           className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3 transition-colors hover:bg-secondary"
                         >
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background font-mono-tabular text-xs font-bold text-muted-foreground">
+                            {user.rank <= 3 ? (
+                              <span className={
+                                user.rank === 1 ? "text-yellow-500" :
+                                user.rank === 2 ? "text-slate-400" :
+                                "text-amber-600"
+                              }>
+                                #{user.rank}
+                              </span>
+                            ) : (
+                              <span>#{user.rank}</span>
+                            )}
+                          </div>
