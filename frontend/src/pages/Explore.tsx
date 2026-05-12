@@ -270,3 +270,7 @@ export default function Explore() {
                       disabled={!tipInput || parseInt(tipInput) <= 0}
                       className="gap-1.5"
                     ></Button>
+                    <Search className="h-3.5 w-3.5" />
+                      Search
+                    </Button>
+                  </div>
