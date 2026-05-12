@@ -309,3 +309,12 @@ export default function Explore() {
                             </p>
                           </div>
                         </div>
+                        {tipRecord.data.message && (
+                          <div>
+                            <span className="text-xs text-muted-foreground">Message</span>
+                            <p className="text-sm">{tipRecord.data.message}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
