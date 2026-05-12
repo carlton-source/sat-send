@@ -242,3 +242,6 @@ export default function Explore() {
                       </div>
                     </div>
                   )}
+                  </CardContent>
+              </Card>
+            </TabsContent>
