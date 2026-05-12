@@ -218,3 +218,8 @@ export default function Explore() {
                           {formatStx(userStats.data.totalSentMicroStx / MICRO_STX_PER_STX)} STX
                         </p>
                       </div>
+                      <div className="rounded-lg bg-secondary p-4">
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <ArrowDownLeft className="h-3 w-3" />
+                          Tips Received
+                        </div>
