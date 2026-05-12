@@ -213,3 +213,8 @@ export default function Explore() {
                           <ArrowUpRight className="h-3 w-3" />
                           Tips Sent
                         </div>
+                        <p className="mt-1 font-mono-tabular text-xl font-semibold">{userStats.data.tipsSent}</p>
+                        <p className="font-mono-tabular text-xs text-muted-foreground">
+                          {formatStx(userStats.data.totalSentMicroStx / MICRO_STX_PER_STX)} STX
+                        </p>
+                      </div>
