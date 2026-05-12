@@ -61,6 +61,16 @@ export default function Explore() {
               <TabsTrigger value="tip">Tip Lookup</TabsTrigger>
             </TabsList>
 
+            {/* Protocol Stats Tab */}
+            <TabsContent value="stats">
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                <StatCard label="Total Tips" value={stats.data ? stats.data.totalTips.toLocaleString() : "—"} icon={Zap} isLoading={stats.isLoading} className="animate-slide-up stagger-1" />
+                <StatCard label="Total Volume" value={stats.data ? `${formatStx(stats.data.totalVolumeMicroStx / MICRO_STX_PER_STX)} STX` : "—"} subtitle={stats.data ? `${formatMicroStx(stats.data.totalVolumeMicroStx)} μSTX` : undefined} icon={TrendingUp} isLoading={stats.isLoading} className="animate-slide-up stagger-2" />
+                <StatCard label="Fees Collected" value={stats.data ? `${formatStx(stats.data.totalFeesMicroStx / MICRO_STX_PER_STX)} STX` : "—"} subtitle={stats.data ? `${formatMicroStx(stats.data.totalFeesMicroStx)} μSTX` : undefined} icon={DollarSign} isLoading={stats.isLoading} className="animate-slide-up stagger-3" />
+                <StatCard label="Active Tippers" value={stats.data ? stats.data.activeTippers.toLocaleString() : "—"} icon={Users} isLoading={stats.isLoading} className="animate-slide-up stagger-4" />
+              </div>
+            </TabsContent>
+
             {/* Active Users Directory */}
             <TabsContent value="directory">
               <Card className="shadow-layer-2 animate-fade-in">
@@ -111,7 +121,7 @@ export default function Explore() {
                         </Link>
                       ))}
                     </div>
-                    ) : null}
+                  ) : null}
                 </CardContent>
               </Card>
             </TabsContent>
@@ -242,7 +252,7 @@ export default function Explore() {
                       </div>
                     </div>
                   )}
-                  </CardContent>
+                </CardContent>
               </Card>
             </TabsContent>
 
@@ -269,11 +279,19 @@ export default function Explore() {
                       }}
                       disabled={!tipInput || parseInt(tipInput) <= 0}
                       className="gap-1.5"
-                    ></Button>
-                    <Search className="h-3.5 w-3.5" />
+                    >
+                      <Search className="h-3.5 w-3.5" />
                       Search
                     </Button>
                   </div>
+
+                  {tipRecord.isLoading && (
+                    <div className="space-y-2">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Skeleton key={i} className="h-5 w-full" />
+                      ))}
+                    </div>
+                  )}
 
                   {tipRecord.data && (
                     <div className="space-y-3 rounded-lg bg-secondary p-4 animate-fade-in">
@@ -318,14 +336,24 @@ export default function Explore() {
                       </div>
                     </div>
                   )}
-                  searchTipId !== null && !tipRecord.isLoading && !tipRecord.data && (
+
+                  {searchTipId !== null && !tipRecord.isLoading && !tipRecord.data && (
                     <div className="flex flex-col items-center gap-3 py-8 text-center animate-fade-in">
                       <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
                         <FileQuestion className="h-6 w-6 text-muted-foreground/40" />
                       </div>
-                      div>
+                      <div>
                         <p className="text-sm font-medium text-muted-foreground">Tip not found</p>
                         <p className="mt-0.5 text-xs text-muted-foreground/60">No tip exists with this ID — try a different number</p>
                       </div>
                     </div>
                   )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </PageTransition>
+    </AppShell>
+  );
+}
