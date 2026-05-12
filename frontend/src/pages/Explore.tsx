@@ -126,3 +126,10 @@ export default function Explore() {
                   </div>
                   <p className="text-xs text-muted-foreground">Recently sent tips across the platform</p>
                 </CardHeader>
+                <CardContent>
+                  {recentTips.isLoading ? (
+                    <div className="space-y-2">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Skeleton key={i} className="h-16 w-full" />
+                      ))}
+                    </div>
