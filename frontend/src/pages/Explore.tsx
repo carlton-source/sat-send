@@ -252,3 +252,12 @@ export default function Explore() {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-medium">Tip Lookup</CardTitle>
                 </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      placeholder="Enter Tip ID…"
+                      className="flex-1 font-mono-tabular"
+                      value={tipInput}
+                      onChange={(e) => setTipInput(e.target.value)}
+                    />
