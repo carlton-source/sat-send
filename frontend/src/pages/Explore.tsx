@@ -261,3 +261,12 @@ export default function Explore() {
                       value={tipInput}
                       onChange={(e) => setTipInput(e.target.value)}
                     />
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        const id = parseInt(tipInput);
+                        if (id > 0) setSearchTipId(id);
+                      }}
+                      disabled={!tipInput || parseInt(tipInput) <= 0}
+                      className="gap-1.5"
+                    ></Button>
