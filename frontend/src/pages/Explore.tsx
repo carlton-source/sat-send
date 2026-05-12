@@ -99,3 +99,15 @@ export default function Explore() {
                               <span>#{user.rank}</span>
                             )}
                           </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="font-mono-tabular text-xs">{truncatePrincipal(user.principal)}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {user.tipCount} tips · {formatStx(user.totalMicroStx / MICRO_STX_PER_STX)} STX
+                            </p>
+                          </div>
+                          <Badge variant="outline" className="text-xs">
+                            View Profile
+                          </Badge>
+                        </Link>
+                      ))}
+                    </div>
