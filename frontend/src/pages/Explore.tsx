@@ -153,3 +153,16 @@ export default function Explore() {
                                 {truncatePrincipal(tip.recipient)}
                               </Link>
                             </div>
+                            {tip.message && (
+                              <p className="mt-0.5 truncate text-xs text-muted-foreground">{tip.message}</p>
+                            )}
+                            <p className="mt-0.5 text-[10px] text-muted-foreground/60">
+                              {formatDistanceToNow(tip.timestamp, { addSuffix: true })}
+                            </p>
+                          </div>
+                          <span className="shrink-0 font-mono-tabular text-sm font-semibold">
+                            {formatStx(tip.amountMicroStx / MICRO_STX_PER_STX)} STX
+                          </span>
+                        </div>
+                      ))}
+                    </div>
