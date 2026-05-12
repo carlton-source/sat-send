@@ -36,3 +36,9 @@ export default function Explore() {
     queryFn: () => getUserStats(searchPrincipal),
     enabled: !!searchPrincipal,
   });
+
+  const tipRecord = useQuery({
+    queryKey: ["tip", searchTipId],
+    queryFn: () => getTip(searchTipId!),
+    enabled: searchTipId !== null,
+  });
