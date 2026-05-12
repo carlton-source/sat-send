@@ -26,3 +26,7 @@ export default function Explore() {
   const [tipInput, setTipInput] = useState("");
   const [searchPrincipal, setSearchPrincipal] = useState("");
   const [searchTipId, setSearchTipId] = useState<number | null>(null);
+
+  const stats = useQuery({ queryKey: ["platform-stats"], queryFn: getPlatformStats });
+  const recentTips = useQuery({ queryKey: ["recent-tips"], queryFn: getRecentTips });
+  const activeUsers = useQuery({ queryKey: ["leaderboard-senders"], queryFn: () => getLeaderboard("senders") });
