@@ -274,3 +274,15 @@ export default function Explore() {
                       Search
                     </Button>
                   </div>
+
+                  {tipRecord.data && (
+                    <div className="space-y-3 rounded-lg bg-secondary p-4 animate-fade-in">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="font-mono-tabular">
+                          <Hash className="mr-1 h-3 w-3" />
+                          {tipRecord.data.id}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">
+                          Block {tipRecord.data.blockHeight.toLocaleString()}
+                        </span>
+                      </div>
