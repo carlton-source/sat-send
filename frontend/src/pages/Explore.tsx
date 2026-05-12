@@ -286,3 +286,8 @@ export default function Explore() {
                           Block {tipRecord.data.blockHeight.toLocaleString()}
                         </span>
                       </div>
+                      <div className="grid gap-2 text-sm">
+                        <div>
+                          <span className="text-xs text-muted-foreground">Sender</span>
+                          <p className="font-mono-tabular text-xs">{tipRecord.data.sender}</p>
+                        </div>
