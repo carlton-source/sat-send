@@ -42,3 +42,12 @@ export default function Explore() {
     queryFn: () => getTip(searchTipId!),
     enabled: searchTipId !== null,
   });
+
+  return (
+    <AppShell>
+      <PageTransition>
+        <div className="container py-6">
+          <div className="mb-6">
+            <h1 className="text-xl font-semibold tracking-tight">Explore</h1>
+            <p className="text-sm text-muted-foreground">Protocol stats, active users, trending tips, and lookups</p>
+          </div>
