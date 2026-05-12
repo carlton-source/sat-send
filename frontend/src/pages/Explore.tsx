@@ -143,3 +143,13 @@ export default function Explore() {
                           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background">
                             <ArrowUpRight className="h-4 w-4 text-primary" />
                           </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-1.5 text-xs">
+                              <Link to={`/profile/${tip.sender}`} className="font-mono-tabular hover:underline underline-offset-2">
+                                {truncatePrincipal(tip.sender)}
+                              </Link>
+                              <span className="text-muted-foreground">→</span>
+                              <Link to={`/profile/${tip.recipient}`} className="font-mono-tabular hover:underline underline-offset-2">
+                                {truncatePrincipal(tip.recipient)}
+                              </Link>
+                            </div>
