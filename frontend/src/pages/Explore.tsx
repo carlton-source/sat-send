@@ -223,3 +223,10 @@ export default function Explore() {
                           <ArrowDownLeft className="h-3 w-3" />
                           Tips Received
                         </div>
+                        <p className="mt-1 font-mono-tabular text-xl font-semibold">{userStats.data.tipsReceived}</p>
+                        <p className="font-mono-tabular text-xs text-muted-foreground">
+                          {formatStx(userStats.data.totalReceivedMicroStx / MICRO_STX_PER_STX)} STX
+                        </p>
+                      </div>
+                    </div>
+                  )}
