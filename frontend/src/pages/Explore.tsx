@@ -205,3 +205,11 @@ export default function Explore() {
                       ))}
                     </div>
                   )}
+
+                  {userStats.data && (
+                    <div className="grid grid-cols-2 gap-3 animate-fade-in">
+                      <div className="rounded-lg bg-secondary p-4">
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <ArrowUpRight className="h-3 w-3" />
+                          Tips Sent
+                        </div>
