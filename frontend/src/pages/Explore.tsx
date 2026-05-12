@@ -60,3 +60,14 @@ export default function Explore() {
               <TabsTrigger value="user">User Lookup</TabsTrigger>
               <TabsTrigger value="tip">Tip Lookup</TabsTrigger>
             </TabsList>
+
+            {/* Active Users Directory */}
+            <TabsContent value="directory">
+              <Card className="shadow-layer-2 animate-fade-in">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2">
+                    <UserCheck className="h-4 w-4 text-primary" />
+                    <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Top contributors by tip volume</p>
+                </CardHeader>
