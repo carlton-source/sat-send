@@ -20,3 +20,9 @@ import {
   Zap, TrendingUp, DollarSign, Users, Search, ArrowUpRight, ArrowDownLeft,
   Hash, SearchX, FileQuestion, Flame, UserCheck,
 } from "lucide-react";
+
+export default function Explore() {
+  const [userInput, setUserInput] = useState("");
+  const [tipInput, setTipInput] = useState("");
+  const [searchPrincipal, setSearchPrincipal] = useState("");
+  const [searchTipId, setSearchTipId] = useState<number | null>(null);
