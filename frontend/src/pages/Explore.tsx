@@ -230,3 +230,15 @@ export default function Explore() {
                       </div>
                     </div>
                   )}
+
+                  {searchPrincipal && !userStats.isLoading && !userStats.data && (
+                    <div className="flex flex-col items-center gap-3 py-8 text-center animate-fade-in">
+                      <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
+                        <SearchX className="h-6 w-6 text-muted-foreground/40" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground">No data found</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground/60">This address hasn't sent or received any tips yet</p>
+                      </div>
+                    </div>
+                  )}
