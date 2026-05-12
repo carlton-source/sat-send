@@ -51,3 +51,12 @@ export default function Explore() {
             <h1 className="text-xl font-semibold tracking-tight">Explore</h1>
             <p className="text-sm text-muted-foreground">Protocol stats, active users, trending tips, and lookups</p>
           </div>
+
+          <Tabs defaultValue="stats">
+            <TabsList className="mb-4">
+              <TabsTrigger value="stats">Protocol Stats</TabsTrigger>
+              <TabsTrigger value="directory">Active Users</TabsTrigger>
+              <TabsTrigger value="trending">Trending Tips</TabsTrigger>
+              <TabsTrigger value="user">User Lookup</TabsTrigger>
+              <TabsTrigger value="tip">Tip Lookup</TabsTrigger>
+            </TabsList>
