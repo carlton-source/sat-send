@@ -139,4 +139,7 @@ export default function Explore() {
                         <div
                           key={tip.id}
                           className="flex items-start gap-3 rounded-lg bg-secondary/50 p-3"
-                        ></div>
+                        >
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background">
+                            <ArrowUpRight className="h-4 w-4 text-primary" />
+                          </div>
