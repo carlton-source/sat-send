@@ -245,3 +245,10 @@ export default function Explore() {
                   </CardContent>
               </Card>
             </TabsContent>
+
+            {/* Tip Lookup Tab */}
+            <TabsContent value="tip">
+              <Card className="shadow-layer-2 animate-fade-in">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-medium">Tip Lookup</CardTitle>
+                </CardHeader>
