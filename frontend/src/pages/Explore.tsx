@@ -295,3 +295,10 @@ export default function Explore() {
                           <span className="text-xs text-muted-foreground">Recipient</span>
                           <p className="font-mono-tabular text-xs">{tipRecord.data.recipient}</p>
                         </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <span className="text-xs text-muted-foreground">Amount</span>
+                            <p className="font-mono-tabular font-semibold">
+                              {formatStx(tipRecord.data.amountMicroStx / MICRO_STX_PER_STX)} STX
+                            </p>
+                          </div>
