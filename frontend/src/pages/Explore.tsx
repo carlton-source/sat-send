@@ -170,3 +170,10 @@ export default function Explore() {
                 </CardContent>
               </Card>
             </TabsContent>
+
+            {/* User Lookup Tab */}
+            <TabsContent value="user">
+              <Card className="shadow-layer-2 animate-fade-in">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-medium">User Lookup</CardTitle>
+                </CardHeader>
