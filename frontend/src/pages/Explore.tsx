@@ -71,3 +71,18 @@ export default function Explore() {
                   </div>
                   <p className="text-xs text-muted-foreground">Top contributors by tip volume</p>
                 </CardHeader>
+                <CardContent>
+                  {activeUsers.isLoading ? (
+                    <div className="space-y-2">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Skeleton key={i} className="h-14 w-full" />
+                      ))}
+                    </div>
+                  ) : activeUsers.data ? (
+                    <div className="space-y-2">
+                      {activeUsers.data.map((user) => (
+                        <Link
+                          key={user.principal}
+                          to={`/profile/${user.principal}`}
+                          className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3 transition-colors hover:bg-secondary"
+                        >
