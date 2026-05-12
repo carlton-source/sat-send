@@ -115,3 +115,14 @@ export default function Explore() {
                 </CardContent>
               </Card>
             </TabsContent>
+
+            {/* Trending Tips */}
+            <TabsContent value="trending">
+              <Card className="shadow-layer-2 animate-fade-in">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2">
+                    <Flame className="h-4 w-4 text-primary" />
+                    <CardTitle className="text-sm font-medium">Trending Tips</CardTitle>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Recently sent tips across the platform</p>
+                </CardHeader>
