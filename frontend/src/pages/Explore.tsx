@@ -177,3 +177,23 @@ export default function Explore() {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm font-medium">User Lookup</CardTitle>
                 </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="Enter Stacks principal address…"
+                      className="flex-1 font-mono-tabular text-xs"
+                      value={userInput}
+                      onChange={(e) => setUserInput(e.target.value)}
+                    />
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        if (isValidStacksAddress(userInput)) setSearchPrincipal(userInput);
+                      }}
+                      disabled={!isValidStacksAddress(userInput)}
+                      className="gap-1.5"
+                    >
+                      <Search className="h-3.5 w-3.5" />
+                      Search
+                    </Button>
+                  </div>
