@@ -30,3 +30,9 @@ export default function Explore() {
   const stats = useQuery({ queryKey: ["platform-stats"], queryFn: getPlatformStats });
   const recentTips = useQuery({ queryKey: ["recent-tips"], queryFn: getRecentTips });
   const activeUsers = useQuery({ queryKey: ["leaderboard-senders"], queryFn: () => getLeaderboard("senders") });
+
+  const userStats = useQuery({
+    queryKey: ["user-stats", searchPrincipal],
+    queryFn: () => getUserStats(searchPrincipal),
+    enabled: !!searchPrincipal,
+  });
