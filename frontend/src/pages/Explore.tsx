@@ -291,3 +291,7 @@ export default function Explore() {
                           <span className="text-xs text-muted-foreground">Sender</span>
                           <p className="font-mono-tabular text-xs">{tipRecord.data.sender}</p>
                         </div>
+                        <div>
+                          <span className="text-xs text-muted-foreground">Recipient</span>
+                          <p className="font-mono-tabular text-xs">{tipRecord.data.recipient}</p>
+                        </div>
