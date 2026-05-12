@@ -318,3 +318,8 @@ export default function Explore() {
                       </div>
                     </div>
                   )}
+                  searchTipId !== null && !tipRecord.isLoading && !tipRecord.data && (
+                    <div className="flex flex-col items-center gap-3 py-8 text-center animate-fade-in">
+                      <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
+                        <FileQuestion className="h-6 w-6 text-muted-foreground/40" />
+                      </div>
