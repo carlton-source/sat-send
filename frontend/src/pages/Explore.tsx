@@ -302,3 +302,10 @@ export default function Explore() {
                               {formatStx(tipRecord.data.amountMicroStx / MICRO_STX_PER_STX)} STX
                             </p>
                           </div>
+                          <div>
+                            <span className="text-xs text-muted-foreground">Fee</span>
+                            <p className="font-mono-tabular">
+                              {formatStx(tipRecord.data.feeMicroStx / MICRO_STX_PER_STX)} STX
+                            </p>
+                          </div>
+                        </div>
