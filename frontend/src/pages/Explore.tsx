@@ -133,3 +133,10 @@ export default function Explore() {
                         <Skeleton key={i} className="h-16 w-full" />
                       ))}
                     </div>
+                  ) : recentTips.data ? (
+                    <div className="space-y-2">
+                      {recentTips.data.map((tip) => (
+                        <div
+                          key={tip.id}
+                          className="flex items-start gap-3 rounded-lg bg-secondary/50 p-3"
+                        ></div>
