@@ -323,3 +323,9 @@ export default function Explore() {
                       <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
                         <FileQuestion className="h-6 w-6 text-muted-foreground/40" />
                       </div>
+                      div>
+                        <p className="text-sm font-medium text-muted-foreground">Tip not found</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground/60">No tip exists with this ID — try a different number</p>
+                      </div>
+                    </div>
+                  )}
