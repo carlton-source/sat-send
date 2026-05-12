@@ -111,3 +111,7 @@ export default function Explore() {
                         </Link>
                       ))}
                     </div>
+                    ) : null}
+                </CardContent>
+              </Card>
+            </TabsContent>
