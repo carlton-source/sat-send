@@ -166,3 +166,7 @@ export default function Explore() {
                         </div>
                       ))}
                     </div>
+                  ) : null}
+                </CardContent>
+              </Card>
+            </TabsContent>
