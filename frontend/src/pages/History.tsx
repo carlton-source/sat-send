@@ -54,3 +54,7 @@ const PAGE_SIZE = 8;
     queryFn: () => getTransactionHistory(principal!),
     enabled: isConnected && !!principal,
   });
+
+  const filtered = useMemo(() => {
+    if (!history.data) return [];
+    let items = [...history.data];
