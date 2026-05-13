@@ -293,3 +293,14 @@ export default function History() {
                           >
                             <ChevronLeft className="h-4 w-4" />
                           </Button>
+                          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                            <Button
+                              key={p}
+                              variant={p === safePage ? "default" : "outline"}
+                              size="icon"
+                              className="h-8 w-8 text-xs"
+                              onClick={() => setPage(p)}
+                            >
+                              {p}
+                            </Button>
+                          ))}
