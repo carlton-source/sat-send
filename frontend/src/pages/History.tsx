@@ -75,3 +75,8 @@ const PAGE_SIZE = 8;
     items.sort((a, b) =>
       sortOrder === "newest" ? b.timestamp - a.timestamp : a.timestamp - b.timestamp
     );
+
+  // Reset page when filters change
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  if (safePage !== page) setPage(safePage);
