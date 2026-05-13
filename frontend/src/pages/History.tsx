@@ -248,7 +248,6 @@ export default function History() {
                           key={tx.id}
                           className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3"
                         >
-
                           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background">
                             {tx.direction === "sent" ? (
                               <ArrowUpRight className="h-4 w-4 text-destructive" />
@@ -304,7 +303,6 @@ export default function History() {
                               {p}
                             </Button>
                           ))}
-
                           <Button
                             variant="outline"
                             size="icon"
@@ -314,3 +312,16 @@ export default function History() {
                           >
                             <ChevronRight className="h-4 w-4" />
                           </Button>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </PageTransition>
+    </AppShell>
+  );
+}
