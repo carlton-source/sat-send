@@ -128,3 +128,13 @@ const PAGE_SIZE = 8;
                         }}
                       />
                     </div>
+                    <Select
+                      value={directionFilter}
+                      onValueChange={(v) => {
+                        setDirectionFilter(v as DirectionFilter);
+                        setPage(1);
+                      }}
+                    >
+                      <SelectTrigger className="h-8 w-28 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
