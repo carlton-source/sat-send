@@ -248,3 +248,11 @@ export default function History() {
                           key={tx.id}
                           className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3"
                         >
+
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background">
+                            {tx.direction === "sent" ? (
+                              <ArrowUpRight className="h-4 w-4 text-destructive" />
+                            ) : (
+                              <ArrowDownLeft className="h-4 w-4 text-success" />
+                            )}
+                          </div>
