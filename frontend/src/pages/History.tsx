@@ -48,3 +48,9 @@ const PAGE_SIZE = 8;
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
+
+  const history = useQuery({
+    queryKey: ["tx-history", principal],
+    queryFn: () => getTransactionHistory(principal!),
+    enabled: isConnected && !!principal,
+  });
