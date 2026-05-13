@@ -43,6 +43,7 @@ type SortOrder = "newest" | "oldest";
 
 const PAGE_SIZE = 8;
 
+export default function History() {
   const { isConnected, principal, connect, isConnecting } = useWalletStore();
   const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
@@ -75,6 +76,9 @@ const PAGE_SIZE = 8;
     items.sort((a, b) =>
       sortOrder === "newest" ? b.timestamp - a.timestamp : a.timestamp - b.timestamp
     );
+
+    return items;
+  }, [history.data, directionFilter, sortOrder, searchQuery]);
 
   // Reset page when filters change
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
@@ -159,7 +163,7 @@ const PAGE_SIZE = 8;
                         <SelectItem value="oldest">Oldest</SelectItem>
                       </SelectContent>
                     </Select>
-                    </div>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
@@ -169,7 +173,7 @@ const PAGE_SIZE = 8;
                       <Skeleton key={i} className="h-12 w-full" />
                     ))}
                   </div>
-                  ) : filtered.length === 0 ? (
+                ) : filtered.length === 0 ? (
                   <div className="flex flex-col items-center gap-3 py-12 text-center">
                     <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
                       <Inbox className="h-6 w-6 text-muted-foreground/40" />
@@ -181,7 +185,7 @@ const PAGE_SIZE = 8;
                         : "Your transaction history will appear here"}
                     </p>
                   </div>
-                  ) : (
+                ) : (
                   <>
                     {/* Desktop table */}
                     <div className="hidden md:block">
@@ -215,3 +219,24 @@ const PAGE_SIZE = 8;
                                   {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)} STX
                                 </span>
                               </TableCell>
+                              <TableCell className="max-w-[200px] truncate text-xs text-muted-foreground">
+                                {tx.message || "—"}
+                              </TableCell>
+                              <TableCell className="text-right font-mono-tabular text-xs text-muted-foreground">
+                                {formatDistanceToNow(tx.timestamp, { addSuffix: true })}
+                              </TableCell>
+                              <TableCell>
+                                <a
+                                  href={`${STACKS_EXPLORER_URL}/txid/${tx.txId}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="opacity-0 transition-opacity group-hover:opacity-100"
+                                >
+                                  <ExternalLink className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
+                                </a>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
