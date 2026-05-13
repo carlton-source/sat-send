@@ -144,3 +144,13 @@ const PAGE_SIZE = 8;
                         <SelectItem value="received">Received</SelectItem>
                       </SelectContent>
                     </Select>
+                    <Select
+                      value={sortOrder}
+                      onValueChange={(v) => {
+                        setSortOrder(v as SortOrder);
+                        setPage(1);
+                      }}
+                    >
+                      <SelectTrigger className="h-8 w-28 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
