@@ -169,3 +169,15 @@ const PAGE_SIZE = 8;
                       <Skeleton key={i} className="h-12 w-full" />
                     ))}
                   </div>
+                  ) : filtered.length === 0 ? (
+                  <div className="flex flex-col items-center gap-3 py-12 text-center">
+                    <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
+                      <Inbox className="h-6 w-6 text-muted-foreground/40" />
+                    </div>
+                    <p className="text-sm font-medium text-muted-foreground">No transactions found</p>
+                    <p className="text-xs text-muted-foreground/60">
+                      {searchQuery || directionFilter !== "all"
+                        ? "Try adjusting your filters"
+                        : "Your transaction history will appear here"}
+                    </p>
+                  </div>
