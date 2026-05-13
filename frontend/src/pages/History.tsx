@@ -196,3 +196,13 @@ const PAGE_SIZE = 8;
                             <TableHead className="w-10"></TableHead>
                           </TableRow>
                         </TableHeader>
+                        <TableBody>
+                          {paginated.map((tx) => (
+                            <TableRow key={tx.id} className="group">
+                              <TableCell>
+                                {tx.direction === "sent" ? (
+                                  <ArrowUpRight className="h-4 w-4 text-destructive" />
+                                ) : (
+                                  <ArrowDownLeft className="h-4 w-4 text-success" />
+                                )}
+                              </TableCell>
