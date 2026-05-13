@@ -276,10 +276,20 @@ export default function History() {
                         </div>
                       ))}
                     </div>
-                    
+
                     {/* Pagination */}
                     {totalPages > 1 && (
                       <div className="flex items-center justify-between border-t pt-4 mt-4">
                         <p className="text-xs text-muted-foreground">
                           Showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of {filtered.length}
                         </p>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-8 w-8"
+                            disabled={safePage <= 1}
+                            onClick={() => setPage((p) => p - 1)}
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                          </Button>
