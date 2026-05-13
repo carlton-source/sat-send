@@ -276,3 +276,10 @@ export default function History() {
                         </div>
                       ))}
                     </div>
+                    
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                      <div className="flex items-center justify-between border-t pt-4 mt-4">
+                        <p className="text-xs text-muted-foreground">
+                          Showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of {filtered.length}
+                        </p>
