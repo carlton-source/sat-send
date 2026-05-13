@@ -209,3 +209,9 @@ const PAGE_SIZE = 8;
                               <TableCell>
                                 <AddressHoverCard principal={tx.counterparty} />
                               </TableCell>
+                              <TableCell>
+                                <span className="font-mono-tabular text-sm font-semibold">
+                                  {tx.direction === "sent" ? "−" : "+"}
+                                  {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)} STX
+                                </span>
+                              </TableCell>
