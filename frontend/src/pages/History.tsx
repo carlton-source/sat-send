@@ -206,3 +206,6 @@ const PAGE_SIZE = 8;
                                   <ArrowDownLeft className="h-4 w-4 text-success" />
                                 )}
                               </TableCell>
+                              <TableCell>
+                                <AddressHoverCard principal={tx.counterparty} />
+                              </TableCell>
