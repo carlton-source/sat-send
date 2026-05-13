@@ -71,3 +71,7 @@ const PAGE_SIZE = 8;
           t.message.toLowerCase().includes(q)
       );
     }
+
+    items.sort((a, b) =>
+      sortOrder === "newest" ? b.timestamp - a.timestamp : a.timestamp - b.timestamp
+    );
