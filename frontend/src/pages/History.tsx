@@ -264,3 +264,15 @@ export default function History() {
                                 {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)}
                               </span>
                             </div>
+                            <div className="flex items-center justify-between mt-0.5">
+                              <span className="truncate text-xs text-muted-foreground pr-2">
+                                {tx.message || "No message"}
+                              </span>
+                              <span className="shrink-0 text-[10px] text-muted-foreground/60">
+                                {formatDistanceToNow(tx.timestamp, { addSuffix: true })}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
