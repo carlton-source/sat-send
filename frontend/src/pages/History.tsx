@@ -159,3 +159,6 @@ const PAGE_SIZE = 8;
                         <SelectItem value="oldest">Oldest</SelectItem>
                       </SelectContent>
                     </Select>
+                    </div>
+                </div>
+              </CardHeader>
