@@ -222,3 +222,8 @@ export default function History() {
                                <TableCell className="max-w-[200px] truncate text-xs text-muted-foreground">
                                 {tx.message || "—"}
                               </TableCell>
+
+                              <TableCell className="text-right font-mono-tabular text-xs text-muted-foreground">
+                                {formatDistanceToNow(tx.timestamp, { addSuffix: true })}
+                              </TableCell>
+                              <TableCell></TableCell>
