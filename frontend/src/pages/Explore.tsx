@@ -42,3 +42,10 @@ type DirectionFilter = "all" | "sent" | "received";
 type SortOrder = "newest" | "oldest";
 
 const PAGE_SIZE = 8;
+
+export default function History() {
+  const { isConnected, principal, connect, isConnecting } = useWalletStore();
+  const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
