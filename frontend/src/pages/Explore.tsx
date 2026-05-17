@@ -76,3 +76,6 @@ export default function History() {
     items.sort((a, b) =>
       sortOrder === "newest" ? b.timestamp - a.timestamp : a.timestamp - b.timestamp
     );
+
+    return items;
+  }, [history.data, directionFilter, sortOrder, searchQuery]);
