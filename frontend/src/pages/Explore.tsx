@@ -114,8 +114,7 @@ export default function History() {
                 </Button>
               </CardContent>
             </Card>
-
-            ) : (
+          ) : (
             <Card className="shadow-layer-2">
               <CardHeader className="pb-3">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -139,7 +138,7 @@ export default function History() {
                         setDirectionFilter(v as DirectionFilter);
                         setPage(1);
                       }}
-                      >
+                    >
                       <SelectTrigger className="h-8 w-28 text-xs">
                         <SelectValue />
                       </SelectTrigger>
@@ -174,6 +173,7 @@ export default function History() {
                       <Skeleton key={i} className="h-12 w-full" />
                     ))}
                   </div>
+                ) : filtered.length === 0 ? (
                   <div className="flex flex-col items-center gap-3 py-12 text-center">
                     <div className="rounded-full border-2 border-dashed border-muted-foreground/20 p-4">
                       <Inbox className="h-6 w-6 text-muted-foreground/40" />
@@ -186,7 +186,6 @@ export default function History() {
                     </p>
                   </div>
                 ) : (
-
                   <>
                     {/* Desktop table */}
                     <div className="hidden md:block">
@@ -211,3 +210,12 @@ export default function History() {
                                   <ArrowDownLeft className="h-4 w-4 text-success" />
                                 )}
                               </TableCell>
+                              <TableCell>
+                                <AddressHoverCard principal={tx.counterparty} />
+                              </TableCell>
+                              <TableCell>
+                                <span className="font-mono-tabular text-sm font-semibold">
+                                  {tx.direction === "sent" ? "−" : "+"}
+                                  {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)} STX
+                                </span>
+                              </TableCell
