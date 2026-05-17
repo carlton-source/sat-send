@@ -149,3 +149,21 @@ export default function History() {
                         <SelectItem value="received">Received</SelectItem>
                       </SelectContent>
                     </Select>
+                    <Select
+                      value={sortOrder}
+                      onValueChange={(v) => {
+                        setSortOrder(v as SortOrder);
+                        setPage(1);
+                      }}
+                    >
+                      <SelectTrigger className="h-8 w-28 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="newest">Newest</SelectItem>
+                        <SelectItem value="oldest">Oldest</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </CardHeader>
