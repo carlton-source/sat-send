@@ -219,15 +219,13 @@ export default function History() {
                                   {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)} STX
                                 </span>
                               </TableCell>
-                               <TableCell className="max-w-[200px] truncate text-xs text-muted-foreground">
+                              <TableCell className="max-w-[200px] truncate text-xs text-muted-foreground">
                                 {tx.message || "—"}
                               </TableCell>
-
                               <TableCell className="text-right font-mono-tabular text-xs text-muted-foreground">
                                 {formatDistanceToNow(tx.timestamp, { addSuffix: true })}
                               </TableCell>
                               <TableCell>
-                                <TableCell>
                                 <a
                                   href={`${STACKS_EXPLORER_URL}/txid/${tx.txId}`}
                                   target="_blank"
@@ -250,15 +248,12 @@ export default function History() {
                           key={tx.id}
                           className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3"
                         >
-
                           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background">
                             {tx.direction === "sent" ? (
                               <ArrowUpRight className="h-4 w-4 text-destructive" />
                             ) : (
                               <ArrowDownLeft className="h-4 w-4 text-success" />
                             )}
-                          </div>
-
                           </div>
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center justify-between">
@@ -268,3 +263,15 @@ export default function History() {
                                 {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)}
                               </span>
                             </div>
+                            <div className="flex items-center justify-between mt-0.5">
+                              <span className="truncate text-xs text-muted-foreground pr-2">
+                                {tx.message || "No message"}
+                              </span>
+                              <span className="shrink-0 text-[10px] text-muted-foreground/60">
+                                {formatDistanceToNow(tx.timestamp, { addSuffix: true })}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div
