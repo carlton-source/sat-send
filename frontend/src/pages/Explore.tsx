@@ -218,4 +218,7 @@ export default function History() {
                                   {tx.direction === "sent" ? "−" : "+"}
                                   {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)} STX
                                 </span>
-                              </TableCell
+                              </TableCell>
+                               <TableCell className="max-w-[200px] truncate text-xs text-muted-foreground">
+                                {tx.message || "—"}
+                              </TableCell>
