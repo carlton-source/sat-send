@@ -282,7 +282,6 @@ export default function History() {
                         <p className="text-xs text-muted-foreground">
                           Showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of {filtered.length}
                         </p>
-
                         <div className="flex items-center gap-1">
                           <Button
                             variant="outline"
@@ -290,17 +289,9 @@ export default function History() {
                             className="h-8 w-8"
                             disabled={safePage <= 1}
                             onClick={() => setPage((p) => p - 1)}
-                          ></Button>
-
-                          <div className="flex items-center gap-1">
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-8 w-8"
-                            disabled={safePage <= 1}
-                            onClick={() => setPage((p) => p - 1)}
-                          ></Button>
-
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                          </Button>
                           {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                             <Button
                               key={p}
@@ -311,11 +302,26 @@ export default function History() {
                             >
                               {p}
                             </Button>
-                            ))}
+                          ))}
                           <Button
                             variant="outline"
                             size="icon"
                             className="h-8 w-8"
                             disabled={safePage >= totalPages}
                             onClick={() => setPage((p) => p + 1)}
-                          ></Button>
+                          >
+                            <ChevronRight className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </PageTransition>
+    </AppShell>
+  );
+}
