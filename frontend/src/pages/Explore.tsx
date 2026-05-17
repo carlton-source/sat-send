@@ -242,3 +242,11 @@ export default function History() {
                         </TableBody>
                       </Table>
                     </div>
+
+                    {/* Mobile cards */}
+                    <div className="space-y-2 md:hidden">
+                      {paginated.map((tx) => (
+                        <div
+                          key={tx.id}
+                          className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3"
+                        ></div>
