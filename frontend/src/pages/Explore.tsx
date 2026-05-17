@@ -55,3 +55,7 @@ export default function History() {
     queryFn: () => getTransactionHistory(principal!),
     enabled: isConnected && !!principal,
   });
+
+  const filtered = useMemo(() => {
+    if (!history.data) return [];
+    let items = [...history.data];
