@@ -226,4 +226,19 @@ export default function History() {
                               <TableCell className="text-right font-mono-tabular text-xs text-muted-foreground">
                                 {formatDistanceToNow(tx.timestamp, { addSuffix: true })}
                               </TableCell>
-                              <TableCell></TableCell>
+                              <TableCell>
+                                <TableCell>
+                                <a
+                                  href={`${STACKS_EXPLORER_URL}/txid/${tx.txId}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="opacity-0 transition-opacity group-hover:opacity-100"
+                                >
+                                  <ExternalLink className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
+                                </a>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
