@@ -311,3 +311,11 @@ export default function History() {
                             >
                               {p}
                             </Button>
+                            ))}
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-8 w-8"
+                            disabled={safePage >= totalPages}
+                            onClick={() => setPage((p) => p + 1)}
+                          ></Button>
