@@ -37,3 +37,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+
+type DirectionFilter = "all" | "sent" | "received";
+type SortOrder = "newest" | "oldest";
