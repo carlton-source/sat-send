@@ -86,3 +86,12 @@ export default function History() {
   if (safePage !== page) setPage(safePage);
 
   const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
+  return (
+    <AppShell>
+      <PageTransition>
+        <div className="container py-6">
+          <div className="mb-6">
+            <h1 className="text-xl font-semibold tracking-tight">Transaction History</h1>
+            <p className="text-sm text-muted-foreground">View your past sent and received tips</p>
+          </div>
