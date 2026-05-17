@@ -282,3 +282,12 @@ export default function History() {
                         <p className="text-xs text-muted-foreground">
                           Showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of {filtered.length}
                         </p>
+
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-8 w-8"
+                            disabled={safePage <= 1}
+                            onClick={() => setPage((p) => p - 1)}
+                          ></Button>
