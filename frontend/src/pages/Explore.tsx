@@ -95,3 +95,22 @@ export default function History() {
             <h1 className="text-xl font-semibold tracking-tight">Transaction History</h1>
             <p className="text-sm text-muted-foreground">View your past sent and received tips</p>
           </div>
+
+          {!isConnected ? (
+            <Card className="shadow-layer-2">
+              <CardContent className="flex flex-col items-center gap-4 py-12 text-center">
+                <div className="rounded-full bg-secondary p-4">
+                  <Wallet className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <div>
+                  <p className="font-medium">Connect your wallet</p>
+                  <p className="text-sm text-muted-foreground">
+                    Connect your wallet to view transaction history
+                  </p>
+                </div>
+                <Button onClick={connect} disabled={isConnecting} className="gap-2">
+                  <Wallet className="h-4 w-4" />
+                  {isConnecting ? "Connecting…" : "Connect Wallet"}
+                </Button>
+              </CardContent>
+            </Card>
