@@ -40,3 +40,5 @@ import {
 
 type DirectionFilter = "all" | "sent" | "received";
 type SortOrder = "newest" | "oldest";
+
+const PAGE_SIZE = 8;
