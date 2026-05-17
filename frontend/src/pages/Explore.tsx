@@ -186,3 +186,18 @@ export default function History() {
                     </p>
                   </div>
                 ) : (
+
+                  <>
+                    {/* Desktop table */}
+                    <div className="hidden md:block">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="w-10"></TableHead>
+                            <TableHead>Address</TableHead>
+                            <TableHead>Amount</TableHead>
+                            <TableHead>Message</TableHead>
+                            <TableHead className="text-right">Time</TableHead>
+                            <TableHead className="w-10"></TableHead>
+                          </TableRow>
+                        </TableHeader>
