@@ -59,3 +59,7 @@ export default function History() {
   const filtered = useMemo(() => {
     if (!history.data) return [];
     let items = [...history.data];
+
+    if (directionFilter !== "all") {
+      items = items.filter((t) => t.direction === directionFilter);
+    }
