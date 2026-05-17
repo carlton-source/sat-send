@@ -291,3 +291,12 @@ export default function History() {
                             disabled={safePage <= 1}
                             onClick={() => setPage((p) => p - 1)}
                           ></Button>
+
+                          <div className="flex items-center gap-1">
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-8 w-8"
+                            disabled={safePage <= 1}
+                            onClick={() => setPage((p) => p - 1)}
+                          ></Button>
