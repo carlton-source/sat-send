@@ -258,3 +258,13 @@ export default function History() {
                               <ArrowDownLeft className="h-4 w-4 text-success" />
                             )}
                           </div>
+
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between">
+                              <AddressHoverCard principal={tx.counterparty} />
+                              <span className="font-mono-tabular text-sm font-semibold">
+                                {tx.direction === "sent" ? "−" : "+"}
+                                {formatStx(tx.amountMicroStx / MICRO_STX_PER_STX)}
+                              </span>
+                            </div>
