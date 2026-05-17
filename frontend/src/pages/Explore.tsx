@@ -139,3 +139,13 @@ export default function History() {
                         setDirectionFilter(v as DirectionFilter);
                         setPage(1);
                       }}
+                      >
+                      <SelectTrigger className="h-8 w-28 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="sent">Sent</SelectItem>
+                        <SelectItem value="received">Received</SelectItem>
+                      </SelectContent>
+                    </Select>
