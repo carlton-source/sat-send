@@ -300,3 +300,14 @@ export default function History() {
                             disabled={safePage <= 1}
                             onClick={() => setPage((p) => p - 1)}
                           ></Button>
+
+                          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                            <Button
+                              key={p}
+                              variant={p === safePage ? "default" : "outline"}
+                              size="icon"
+                              className="h-8 w-8 text-xs"
+                              onClick={() => setPage(p)}
+                            >
+                              {p}
+                            </Button>
