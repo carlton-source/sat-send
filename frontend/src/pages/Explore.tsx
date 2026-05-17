@@ -63,3 +63,12 @@ export default function History() {
     if (directionFilter !== "all") {
       items = items.filter((t) => t.direction === directionFilter);
     }
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      items = items.filter(
+        (t) =>
+          t.counterparty.toLowerCase().includes(q) ||
+          t.message.toLowerCase().includes(q)
+      );
+    }
